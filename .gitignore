@@ -1,0 +1,16 @@
+/vendor
+/wp-admin
+/wp-includes
+*-old
+plugins
+*-plugins
+settings
+smush-*
+updraft
+upgrade-*
+upgrade
+uploads
+languages
+w3tc-*
+entr
+twenty*

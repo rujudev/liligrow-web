@@ -1,0 +1,208 @@
+/*
+Theme Name: Altr Child
+Theme URI: https://envothemes.com/altr-free-wp-theme/
+Template: entr
+Author: EnvoThemes
+Author URI: https://envothemes.com/
+Description: Altr is a fast, clean, lightweight, customizable and modern-looking free responsive WooCommerce WordPress theme for e-commerce stores like clothing, fashion, electronics, ebooks, dress store, sports shop, marketplace, multivendor, equipments or online products. Theme works perfectly with the new block editor (Gutenberg) and popular page builders like Elementor, Beaver Builder, SiteOrigin, Thrive Architect, Divi, Brizy, Visual Composer etc. Theme is compatible with YITH WooCommerce Wishlist, YITH WooCommerce Compare, WooCommerce Variation Swatches and other popular plugins. The theme is SEO friendly, WPML and RTL ready. Theme demo ready to import: https://envothemes.com/altr/
+Tags: one-column,two-columns,full-width-template,right-sidebar,custom-background,custom-menu,custom-header,editor-style,featured-images,translation-ready,custom-logo,threaded-comments,footer-widgets,rtl-language-support,blog,e-commerce
+Version: 1.0.1.1687189762
+Updated: 2023-06-19 15:49:22
+
+*/
+
+a, a:active, a:hover, a:focus {
+    color: #1E84AF;
+}
+#sidebar {
+    margin-left: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+    margin-right: -15px;
+    margin-bottom: 15px;
+    -moz-box-shadow: 0 10px 25px 0 rgba(28,45,113,.17);
+    -webkit-box-shadow: 0 10px 25px 0 rgba(28,45,113,.17);
+    -o-box-shadow: 0 10px 25px 0 rgba(28,45,113,.17);
+    box-shadow: 0 10px 25px 0 rgba(28,45,113,.17);
+    padding: 25px;
+}
+.page-area {
+    padding-top: 35px;
+}
+.widget-title, h2.wp-block-heading {
+    margin-bottom: 15px;
+}
+.site-header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+#content-footer-section {
+    background-color: #e6e6e6;
+}
+#content-footer-section .widget-title h3 {
+    color: #1a1a1a;
+}
+.news-item h2 {
+    margin-top: 15px;
+}
+.news-item h2 a {
+    font-size: 45px;
+    font-weight: 900;
+    line-height: 49px;
+}
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    background-color: #1E84AF;
+}
+.woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover, .woocommerce #respond input#submit.alt:hover, .woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce input.button.alt:hover {
+    color: #1E84AF;
+}
+.woocommerce #respond input#submit.alt.disabled, .woocommerce #respond input#submit.alt.disabled:hover, .woocommerce #respond input#submit.alt:disabled, .woocommerce #respond input#submit.alt:disabled:hover, .woocommerce #respond input#submit.alt:disabled[disabled], .woocommerce #respond input#submit.alt:disabled[disabled]:hover, .woocommerce a.button.alt.disabled, .woocommerce a.button.alt.disabled:hover, .woocommerce a.button.alt:disabled, .woocommerce a.button.alt:disabled:hover, .woocommerce a.button.alt:disabled[disabled], .woocommerce a.button.alt:disabled[disabled]:hover, .woocommerce button.button.alt.disabled, .woocommerce button.button.alt.disabled:hover, .woocommerce button.button.alt:disabled, .woocommerce button.button.alt:disabled:hover, .woocommerce button.button.alt:disabled[disabled], .woocommerce button.button.alt:disabled[disabled]:hover, .woocommerce input.button.alt.disabled, .woocommerce input.button.alt.disabled:hover, .woocommerce input.button.alt:disabled, .woocommerce input.button.alt:disabled:hover, .woocommerce input.button.alt:disabled[disabled], .woocommerce input.button.alt:disabled[disabled]:hover {
+    background-color: #1E84AF;
+}
+.amount-cart {
+    background-color: #1E84AF;
+}
+.amount-cart:before {
+    border-right: 7px solid #1E84AF;
+}
+.cart-contents span.count, .woocommerce span.onsale, .woocommerce .widget_price_filter .ui-slider .ui-slider-range, .woocommerce .widget_price_filter .ui-slider .ui-slider-handle {
+    background-color: #1E84AF;
+}
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active {
+    border-bottom: 3px solid #1E84AF;
+}
+.content-article, .single-post-content {
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+    width: 100%;
+    margin-bottom: 30px;
+    -moz-box-shadow: 0 10px 25px 0 rgba(25,45,110,.20);
+    -webkit-box-shadow: 0 10px 25px 0 rgba(25,45,110,.20);
+    -o-box-shadow: 0 10px 25px 0 rgba(25,45,110,.20);
+    box-shadow: 0 10px 25px 0 rgba(25,45,110,.20);
+    overflow: hidden;
+    clear: none;
+    padding: 0 0 25px;
+}
+.woocommerce article.woo-content, .single-page article {
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    -moz-box-shadow: 0 10px 25px 0 rgba(25,45,110,.20);
+    -webkit-box-shadow: 0 10px 25px 0 rgba(25,45,110,.20);
+    -o-box-shadow: 0 10px 25px 0 rgba(25,45,110,.20);
+    box-shadow: 0 10px 25px 0 rgba(25,45,110,.20);
+    overflow: hidden;
+    padding: 10px 15px 25px;
+}
+.woocommerce article .product {
+    margin-bottom: 25px;
+    padding: 25px;
+}
+.single-head, .article-meta, .post-excerpt, .single-entry-summary, .entry-footer, nav.navigation.post-navigation, .single-footer, a.post-edit-link {
+    padding: 0 25px;
+}
+article .has-post-thumbnail .news-item h2 {
+    margin-top: 0;
+}
+span.comments-meta {
+    float: right;
+}
+.woocommerce span.onsale {
+    top: 0;
+    left: 0;
+}
+.title-header .heading-row {
+    justify-content: center;
+}
+.site-menu {
+    position: relative;
+    border-bottom: 1px solid #f6f6f6;
+    background-color: #fff;
+    -moz-box-shadow: 0 10px 15px 0 rgba(25,45,120,.20);
+    -webkit-box-shadow: 0 10px 15px 0 rgba(25,45,120,.20);
+    -o-box-shadow: 0 10px 15px 0 rgba(25,45,120,.20);
+    box-shadow: 0 10px 15px 0 rgba(25,45,120,.20);
+    z-index: 98;
+    padding: 10px 0;
+}
+.menu-search-widget {
+    margin-left: 15px;
+    width: 100%;
+    max-width: 230px;
+}
+.menu-search-widget .widget_product_search {
+    margin: 0;
+}
+.menu-search-widget input {
+    font-size: 15px;
+    padding-right: 80px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    height: 36px;
+    line-height: 22px;
+}
+.menu-search-widget button[type="submit"] {
+    top: 0;
+    font-size: 11px;
+    right: 0;
+    position: absolute;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    line-height: 22px;
+    padding: 6px 15px;
+}
+.header-widget-area {
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 1;
+}
+.site-heading-sidebar .widget {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.top-bar-section {
+    font-size: 14px;
+    position: relative;
+    border-bottom: 1px solid #f6f6f6;
+    background-color: #f9f9f9;
+    color: #334142;
+    z-index: 98;
+    padding: 5px 0;
+}
+.top-bar-section .widget, .top-bar-section p {
+    margin-bottom: 0;
+}
+.top-bar-section .widget:nth-child(3n-1) {
+    text-align: center;
+}
+.top-bar-section .widget:nth-child(3n) {
+    text-align: right;
+}
+@media (max-width: 767px) {
+.header-widget-area {
+    text-align: center;
+    order: 3;
+    flex: 100%;
+    justify-content: center;
+}
+.site-heading-sidebar .widget {
+    float: none;
+}
+.top-bar-section .widget {
+    text-align: center !important;
+}
+.menu-search-widget {
+    margin-right: 15px;
+    max-width: 100%;
+}
+}

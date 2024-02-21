@@ -1,0 +1,1143 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ithemeland-free-gifts-for-woocommerce-lite\n"
+"POT-Creation-Date: 2023-07-05 13:07+0430\n"
+"PO-Revision-Date: 2018-04-27 12:20+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.3.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_html_e;esc_attr_e;esc_html__;esc_attr__;esc_html_x;esc_attr_x\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: assets/js/common/amcharts/core.js:1
+msgid "iterator"
+msgstr ""
+
+#: classes/bootstrap/WGBL.php:60
+msgid "Woo Free Gift"
+msgstr ""
+
+#: classes/bootstrap/WGBL.php:61
+msgid "Rules | Settings"
+msgstr ""
+
+#: classes/bootstrap/WGBL.php:62
+msgid "Reports"
+msgstr ""
+
+#: classes/controllers/Reports_Controller.php:23
+#: classes/controllers/Rules_Controller.php:16
+msgid "iThemeland Free Gifts For WooCommerce"
+msgstr ""
+
+#: classes/controllers/Rules_Controller.php:23
+#: views/layout/reports_header.php:8
+msgid "Rules"
+msgstr ""
+
+#: classes/controllers/Rules_Controller.php:24
+msgid "Settings"
+msgstr ""
+
+#: classes/controllers/WGBL_Post.php:37 classes/controllers/WGBL_Post.php:44
+#: classes/controllers/WGBL_Post.php:56
+msgid "Success !"
+msgstr ""
+
+#: classes/repositories/Rule.php:45 classes/repositories/Rule.php:60
+#: classes/repositories/Rule.php:61 classes/repositories/Rule.php:94
+#: classes/repositories/Rule.php:96 frontend/classes/admin-order.php:38
+msgid "Simple"
+msgstr ""
+
+#: classes/repositories/Rule.php:46 classes/repositories/Rule.php:70
+#: classes/repositories/Rule.php:109
+msgid "Tiered Quantity - Pro version"
+msgstr ""
+
+#: classes/repositories/Rule.php:47 classes/repositories/Rule.php:74
+#: classes/repositories/Rule.php:115
+msgid "Bulk Quantity - Pro version"
+msgstr ""
+
+#: classes/repositories/Rule.php:48 classes/repositories/Rule.php:75
+#: classes/repositories/Rule.php:116
+msgid "Bulk Pricing - Pro version"
+msgstr ""
+
+#: classes/repositories/Rule.php:49 classes/repositories/Rule.php:81
+#: classes/repositories/Rule.php:122
+msgid "Buy x get x - Pro version"
+msgstr ""
+
+#: classes/repositories/Rule.php:50 classes/repositories/Rule.php:82
+#: classes/repositories/Rule.php:123
+msgid "Buy x get x repeat - Pro version"
+msgstr ""
+
+#: classes/repositories/Rule.php:51 classes/repositories/Rule.php:83
+#: classes/repositories/Rule.php:124
+msgid "Buy x get y - Pro version"
+msgstr ""
+
+#: classes/repositories/Rule.php:52 classes/repositories/Rule.php:84
+#: classes/repositories/Rule.php:125
+msgid "Buy x get y repeat - Pro version"
+msgstr ""
+
+#: classes/repositories/Rule.php:53 classes/repositories/Rule.php:65
+#: classes/repositories/Rule.php:102 frontend/classes/admin-order.php:44
+msgid "Subtotal"
+msgstr ""
+
+#: classes/repositories/Rule.php:54 classes/repositories/Rule.php:66
+#: classes/repositories/Rule.php:103
+msgid "Subtotal repeat - Pro version"
+msgstr ""
+
+#: classes/repositories/Rule.php:64 classes/repositories/Rule.php:100
+msgid "Cart Subtotal"
+msgstr ""
+
+#: classes/repositories/Rule.php:69 classes/repositories/Rule.php:107
+msgid "Tiered"
+msgstr ""
+
+#: classes/repositories/Rule.php:73 classes/repositories/Rule.php:113
+msgid "Bulk"
+msgstr ""
+
+#: classes/repositories/Rule.php:80 classes/repositories/Rule.php:120
+msgid "Buy / Get"
+msgstr ""
+
+#: frontend/classes/admin-order.php:28
+msgid "Yes"
+msgstr ""
+
+#: frontend/classes/admin-order.php:30
+msgid "Buy X Get Y"
+msgstr ""
+
+#: frontend/classes/admin-order.php:32
+msgid "Buy X Get Y Repeat"
+msgstr ""
+
+#: frontend/classes/admin-order.php:34
+msgid "Buy X Get X Repeat"
+msgstr ""
+
+#: frontend/classes/admin-order.php:36
+msgid "Buy X Get X"
+msgstr ""
+
+#: frontend/classes/admin-order.php:40
+msgid "Autimatic"
+msgstr ""
+
+#: frontend/classes/admin-order.php:42
+msgid "Subtotal Repeat"
+msgstr ""
+
+#: frontend/classes/admin-order.php:46
+msgid "Selected Manual"
+msgstr ""
+
+#: frontend/classes/admin-order.php:48
+msgid "Added By Admin"
+msgstr ""
+
+#: frontend/classes/admin-order.php:64
+msgid "Manage Rule"
+msgstr ""
+
+#: frontend/classes/admin-order.php:66
+msgid "Edit"
+msgstr ""
+
+#: frontend/classes/admin-order.php:77
+msgid "Free Gift"
+msgstr ""
+
+#: frontend/classes/admin-order.php:79
+msgid "Rule Gift ID"
+msgstr ""
+
+#: frontend/classes/admin-order.php:81
+msgid "Type"
+msgstr ""
+
+#: frontend/classes/admin-order.php:83 views/reports/dashboard.php:103
+#: views/rules/rule-item.php:27
+msgid "Method"
+msgstr ""
+
+#: frontend/classes/admin-order.php:91
+msgid "Add Manual Gift To this Order"
+msgstr ""
+
+#: frontend/classes/admin-order.php:121
+msgid "Search for a product"
+msgstr ""
+
+#: frontend/classes/admin-order.php:123
+msgid "Add To This Order"
+msgstr ""
+
+#: frontend/classes/front-order.php:285 views/setting/localization.php:25
+#: views/setting/localization.php:26
+msgid "Select Gift"
+msgstr ""
+
+#: frontend/classes/front-order.php:349
+msgid "Price"
+msgstr ""
+
+#: frontend/classes/front-order.php:350
+msgid "Quantity"
+msgstr ""
+
+#: frontend/classes/front-order.php:351
+msgid "Total"
+msgstr ""
+
+#: frontend/functions/condition-functions.php:354
+msgid "Current"
+msgstr ""
+
+#: frontend/functions/condition-functions.php:357
+msgid "current day"
+msgstr ""
+
+#: frontend/functions/condition-functions.php:362
+msgid "current month"
+msgstr ""
+
+#: frontend/functions/condition-functions.php:366
+msgid "current year"
+msgstr ""
+
+#: frontend/functions/condition-functions.php:374
+msgid "Days"
+msgstr ""
+
+#: frontend/functions/condition-functions.php:380
+msgid "Weeks"
+msgstr ""
+
+#: frontend/functions/condition-functions.php:386
+msgid "Months"
+msgstr ""
+
+#: frontend/functions/condition-functions.php:392
+msgid "Years"
+msgstr ""
+
+#: frontend/functions/core_functions.php:90
+#: frontend/functions/core_functions.php:92
+msgid "in stock"
+msgstr ""
+
+#: frontend/views/datatable/child.php:163
+#: frontend/views/datatable/parent.php:109
+msgid "Choose Your Gift(s)"
+msgstr ""
+
+#: frontend/views/datatable/child.php:167
+#: frontend/views/datatable/parent.php:113
+#: frontend/views/modal/autoload-popup.php:177
+#: frontend/views/modal/autoload-popup.php:187
+msgid "Thumb"
+msgstr ""
+
+#: frontend/views/datatable/child.php:168
+#: frontend/views/datatable/parent.php:114
+#: frontend/views/modal/autoload-popup.php:178
+#: frontend/views/modal/autoload-popup.php:188 views/reports/dashboard.php:240
+msgid "Name"
+msgstr ""
+
+#: frontend/views/datatable/child.php:169
+#: frontend/views/datatable/parent.php:115
+#: frontend/views/modal/autoload-popup.php:179
+#: frontend/views/modal/autoload-popup.php:189
+msgid "Add To Cart"
+msgstr ""
+
+#: frontend/views/grid/child.php:26 frontend/views/grid/parent.php:34
+#: frontend/views/modal/autoload-popup.php:19 views/setting/localization.php:17
+#: views/setting/localization.php:18 views/setting/localization.php:22
+msgid "Our Gift"
+msgstr ""
+
+#: frontend/views/grid/child.php:204 frontend/views/grid/parent.php:167
+msgid "Page"
+msgstr ""
+
+#: frontend/views/grid/child.php:205 frontend/views/grid/parent.php:167
+msgid "of"
+msgstr ""
+
+#: frontend/views/modal/autoload-popup.php:145
+#: frontend/views/modal/btn-popup.php:139
+msgid "Out of stock"
+msgstr ""
+
+#: frontend/views/modal/tables.php:68 views/setting/localization.php:21
+msgid "Add Gift"
+msgstr ""
+
+#: ithemeland-free-gifts-for-woo.php:62
+msgid "Get Pro Version"
+msgstr ""
+
+#: ithemeland-free-gifts-for-woo.php:63
+msgid "Docs"
+msgstr ""
+
+#: views/alerts/wgbl_woocommerce_required.php:5
+msgid "WooCommerce Plugin is Inactive !"
+msgstr ""
+
+#: views/layout/header.php:3
+msgid "Loading ..."
+msgstr ""
+
+#: views/layout/header.php:12
+msgid "Boost your sales with creating the right gift for the right customer."
+msgstr ""
+
+#: views/layout/header.php:17
+msgid "Need Help"
+msgstr ""
+
+#: views/layout/header.php:27
+msgid "Watch Pro version"
+msgstr ""
+
+#: views/layout/reports_header.php:7
+msgid "Dashboard"
+msgstr ""
+
+#: views/layout/reports_header.php:9
+msgid "Orders"
+msgstr ""
+
+#: views/layout/reports_header.php:12
+msgid "Customers"
+msgstr ""
+
+#: views/layout/reports_header.php:16
+msgid "All customers"
+msgstr ""
+
+#: views/layout/reports_header.php:17
+msgid "Used rules by customer"
+msgstr ""
+
+#: views/layout/reports_header.php:22
+msgid "Gifts/Products"
+msgstr ""
+
+#: views/layout/reports_header.php:26
+msgid "Products"
+msgstr ""
+
+#: views/layout/reports_header.php:27
+msgid "Received gifts by customer"
+msgstr ""
+
+#: views/layout/reports_header.php:34
+msgid "Date ..."
+msgstr ""
+
+#: views/layout/reports_header.php:34
+msgid "Select date"
+msgstr ""
+
+#: views/reports/dashboard.php:10
+msgid "Total Gifts No."
+msgstr ""
+
+#: views/reports/dashboard.php:19
+msgid "Total Customers No."
+msgstr ""
+
+#: views/reports/dashboard.php:28
+msgid "Used Rule No."
+msgstr ""
+
+#: views/reports/dashboard.php:37
+msgid "Orders No."
+msgstr ""
+
+#: views/reports/dashboard.php:46
+msgid "Top gift"
+msgstr ""
+
+#: views/reports/dashboard.php:47 views/rules/product-buy/row.php:7
+msgid "Product"
+msgstr ""
+
+#: views/reports/dashboard.php:48 views/reports/dashboard.php:272
+msgid "Category"
+msgstr ""
+
+#: views/reports/dashboard.php:56
+msgid "Gift per"
+msgstr ""
+
+#: views/reports/dashboard.php:57
+msgid "Day"
+msgstr ""
+
+#: views/reports/dashboard.php:58
+msgid "Week"
+msgstr ""
+
+#: views/reports/dashboard.php:59
+msgid "Month"
+msgstr ""
+
+#: views/reports/dashboard.php:60
+msgid "Year"
+msgstr ""
+
+#: views/reports/dashboard.php:68
+msgid "Recent 10 orders used the gift"
+msgstr ""
+
+#: views/reports/dashboard.php:76 views/reports/dashboard.php:243
+msgid "Order ID"
+msgstr ""
+
+#: views/reports/dashboard.php:77 views/reports/dashboard.php:244
+#: views/rules/conditions/row.php:11
+msgid "Date"
+msgstr ""
+
+#: views/reports/dashboard.php:78
+msgid "Status"
+msgstr ""
+
+#: views/reports/dashboard.php:79
+msgid "Rules name"
+msgstr ""
+
+#: views/reports/dashboard.php:80
+msgid "Gifts"
+msgstr ""
+
+#: views/reports/dashboard.php:85 views/reports/dashboard.php:109
+#: views/reports/dashboard.php:131 views/reports/dashboard.php:153
+#: views/reports/dashboard.php:177 views/reports/dashboard.php:199
+#: views/reports/dashboard.php:221 views/reports/dashboard.php:249
+#: views/reports/dashboard.php:278
+msgid "No item"
+msgstr ""
+
+#: views/reports/dashboard.php:96
+msgid "Top 5 methods"
+msgstr ""
+
+#: views/reports/dashboard.php:104 views/reports/dashboard.php:126
+#: views/reports/dashboard.php:148 views/reports/dashboard.php:172
+#: views/reports/dashboard.php:194 views/reports/dashboard.php:216
+#: views/reports/dashboard.php:273
+msgid "Count"
+msgstr ""
+
+#: views/reports/dashboard.php:118
+msgid "Top 5 rules"
+msgstr ""
+
+#: views/reports/dashboard.php:125 views/rules/rule-item.php:66
+msgid "Rule name"
+msgstr ""
+
+#: views/reports/dashboard.php:140
+msgid "Top 5 gifts"
+msgstr ""
+
+#: views/reports/dashboard.php:147
+msgid "Gift product"
+msgstr ""
+
+#: views/reports/dashboard.php:164
+msgid "Top 5 categories"
+msgstr ""
+
+#: views/reports/dashboard.php:171
+msgid "Category name"
+msgstr ""
+
+#: views/reports/dashboard.php:186
+msgid "Top 5 countries"
+msgstr ""
+
+#: views/reports/dashboard.php:193
+msgid "Country name"
+msgstr ""
+
+#: views/reports/dashboard.php:208
+msgid "Top 5 states"
+msgstr ""
+
+#: views/reports/dashboard.php:215
+msgid "State name"
+msgstr ""
+
+#: views/reports/dashboard.php:231
+msgid "Recent 10 customers get gift"
+msgstr ""
+
+#: views/reports/dashboard.php:239
+msgid "Email"
+msgstr ""
+
+#: views/reports/dashboard.php:241
+msgid "Username"
+msgstr ""
+
+#: views/reports/dashboard.php:242
+msgid "Used gift"
+msgstr ""
+
+#: views/reports/dashboard.php:259
+msgid "Recent 10 Used gifts"
+msgstr ""
+
+#: views/reports/dashboard.php:267
+msgid "Product name"
+msgstr ""
+
+#: views/reports/dashboard.php:268
+msgid "Sku"
+msgstr ""
+
+#: views/reports/dashboard.php:270
+msgid "Brand"
+msgstr ""
+
+#: views/rules/conditions/row.php:10
+msgid "Date & Times"
+msgstr ""
+
+#: views/rules/conditions/row.php:12
+msgid "Time"
+msgstr ""
+
+#: views/rules/conditions/row.php:13
+msgid "Date & Time"
+msgstr ""
+
+#: views/rules/conditions/row.php:14
+msgid "Days of week"
+msgstr ""
+
+#: views/rules/conditions/row.php:16
+msgid "Cart - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:17
+msgid "Cart subtotal"
+msgstr ""
+
+#: views/rules/conditions/row.php:18
+msgid "Cart total weight"
+msgstr ""
+
+#: views/rules/conditions/row.php:19
+msgid "Cart Total Quantity"
+msgstr ""
+
+#: views/rules/conditions/row.php:20
+msgid "Cart item count"
+msgstr ""
+
+#: views/rules/conditions/row.php:21
+msgid "Coupons applied"
+msgstr ""
+
+#: views/rules/conditions/row.php:23
+msgid "Cart Items - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:24
+msgid "Cart items - Products"
+msgstr ""
+
+#: views/rules/conditions/row.php:25
+msgid "Cart items - Variations"
+msgstr ""
+
+#: views/rules/conditions/row.php:26
+msgid "Cart items - Categories"
+msgstr ""
+
+#: views/rules/conditions/row.php:27
+msgid "Cart items - Attributes"
+msgstr ""
+
+#: views/rules/conditions/row.php:28
+msgid "Cart items - Tags"
+msgstr ""
+
+#: views/rules/conditions/row.php:29
+msgid "Cart items - Shipping Classes"
+msgstr ""
+
+#: views/rules/conditions/row.php:31
+msgid "Cart Items - Quantity - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:32
+msgid "Cart item quantity - Products"
+msgstr ""
+
+#: views/rules/conditions/row.php:33
+msgid "Cart item quantity - Variations"
+msgstr ""
+
+#: views/rules/conditions/row.php:34
+msgid "Cart item quantity - Categories"
+msgstr ""
+
+#: views/rules/conditions/row.php:35
+msgid "Cart item quantity - Attributes"
+msgstr ""
+
+#: views/rules/conditions/row.php:36
+msgid "Cart item quantity - Tags"
+msgstr ""
+
+#: views/rules/conditions/row.php:37
+msgid "Cart item quantity - Shipping Classes"
+msgstr ""
+
+#: views/rules/conditions/row.php:39
+msgid "Cart Items - Subtotal - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:40
+msgid "Cart item subtotal - Products"
+msgstr ""
+
+#: views/rules/conditions/row.php:41
+msgid "Cart item subtotal - Variations"
+msgstr ""
+
+#: views/rules/conditions/row.php:42
+msgid "Cart item subtotal - Categories"
+msgstr ""
+
+#: views/rules/conditions/row.php:43
+msgid "Cart item subtotal - Attributes"
+msgstr ""
+
+#: views/rules/conditions/row.php:44
+msgid "Cart item subtotal - Tags"
+msgstr ""
+
+#: views/rules/conditions/row.php:45
+msgid "Cart item subtotal - Shipping Classes"
+msgstr ""
+
+#: views/rules/conditions/row.php:47
+msgid "Customer - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:48
+msgid "Customer"
+msgstr ""
+
+#: views/rules/conditions/row.php:49
+msgid "User role"
+msgstr ""
+
+#: views/rules/conditions/row.php:50
+msgid "User Capability"
+msgstr ""
+
+#: views/rules/conditions/row.php:51
+msgid "User Meta"
+msgstr ""
+
+#: views/rules/conditions/row.php:52
+msgid "Is logged in"
+msgstr ""
+
+#: views/rules/conditions/row.php:54
+msgid "Customer - Value - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:55
+msgid "Spent - Total"
+msgstr ""
+
+#: views/rules/conditions/row.php:56
+msgid "Spent - Average per order"
+msgstr ""
+
+#: views/rules/conditions/row.php:57
+msgid "Spent - Last order"
+msgstr ""
+
+#: views/rules/conditions/row.php:58
+msgid "Order count"
+msgstr ""
+
+#: views/rules/conditions/row.php:59
+msgid "Last Order"
+msgstr ""
+
+#: views/rules/conditions/row.php:60
+msgid "Customer review count"
+msgstr ""
+
+#: views/rules/conditions/row.php:62
+msgid "Purchase History - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:63
+msgid "Purchased - Products"
+msgstr ""
+
+#: views/rules/conditions/row.php:64
+msgid "Purchased - Variations"
+msgstr ""
+
+#: views/rules/conditions/row.php:65
+msgid "Purchased - Categories"
+msgstr ""
+
+#: views/rules/conditions/row.php:66
+msgid "Purchased - Attributes"
+msgstr ""
+
+#: views/rules/conditions/row.php:67
+msgid "Purchased - Tags"
+msgstr ""
+
+#: views/rules/conditions/row.php:69
+msgid "Purchase History - Quantity - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:70
+msgid "Quantity purchased - Products"
+msgstr ""
+
+#: views/rules/conditions/row.php:71
+msgid "Quantity purchased - Variations"
+msgstr ""
+
+#: views/rules/conditions/row.php:72
+msgid "Quantity purchased - Categories"
+msgstr ""
+
+#: views/rules/conditions/row.php:73
+msgid "Quantity purchased - Attributes"
+msgstr ""
+
+#: views/rules/conditions/row.php:74
+msgid "Quantity purchased - Tags"
+msgstr ""
+
+#: views/rules/conditions/row.php:76
+msgid "Purchase History - Value - Pro version"
+msgstr ""
+
+#: views/rules/conditions/row.php:77
+msgid "Value purchased - Products"
+msgstr ""
+
+#: views/rules/conditions/row.php:78
+msgid "Value purchased - Variations"
+msgstr ""
+
+#: views/rules/conditions/row.php:79
+msgid "Value purchased - Categories"
+msgstr ""
+
+#: views/rules/conditions/row.php:80
+msgid "Value purchased - Attributes"
+msgstr ""
+
+#: views/rules/conditions/row.php:81
+msgid "Value purchased - Tags"
+msgstr ""
+
+#: views/rules/main.php:21
+msgid "No rules configured."
+msgstr ""
+
+#: views/rules/main.php:22
+msgid "Add Rule"
+msgstr ""
+
+#: views/rules/main.php:23 views/setting/general.php:203
+#: views/setting/localization.php:34
+msgid "Save Changes"
+msgstr ""
+
+#: views/rules/product-buy/row.php:8
+msgid "Product Variation"
+msgstr ""
+
+#: views/rules/product-buy/row.php:9
+msgid "Product Category"
+msgstr ""
+
+#: views/rules/product-buy/row.php:10
+msgid "Product Attributes"
+msgstr ""
+
+#: views/rules/product-buy/row.php:11
+msgid "Product Tags"
+msgstr ""
+
+#: views/rules/product-buy/row.php:14
+msgid "Product regular price"
+msgstr ""
+
+#: views/rules/product-buy/row.php:15
+msgid "Product is on sale"
+msgstr ""
+
+#: views/rules/product-buy/row.php:16
+msgid "Product stock quantity"
+msgstr ""
+
+#: views/rules/product-buy/row.php:17
+msgid "Product shipping class"
+msgstr ""
+
+#: views/rules/product-buy/row.php:18
+msgid "Product meta field"
+msgstr ""
+
+#: views/rules/rule-item.php:12
+msgid "Unknown method"
+msgstr ""
+
+#: views/rules/rule-item.php:17
+msgid "Enable"
+msgstr ""
+
+#: views/rules/rule-item.php:18
+msgid "Disable"
+msgstr ""
+
+#: views/rules/rule-item.php:50
+msgid "Quantities Based On"
+msgstr ""
+
+#: views/rules/rule-item.php:53
+msgid "Each individual product"
+msgstr ""
+
+#: views/rules/rule-item.php:54
+msgid "Each individual variation - Pro version"
+msgstr ""
+
+#: views/rules/rule-item.php:55
+msgid "Each individual cart line item - Pro version"
+msgstr ""
+
+#: views/rules/rule-item.php:58
+msgid "Quantities added up by category - Pro version"
+msgstr ""
+
+#: views/rules/rule-item.php:59
+msgid "All quantities added up - Pro version"
+msgstr ""
+
+#: views/rules/rule-item.php:72
+msgid "Description"
+msgstr ""
+
+#: views/rules/rule-item.php:78
+msgid "Quantities & Settings"
+msgstr ""
+
+#: views/rules/rule-item.php:82
+msgid "Subtotal Amount"
+msgstr ""
+
+#: views/rules/rule-item.php:88
+msgid "Buy"
+msgstr ""
+
+#: views/rules/rule-item.php:94 views/rules/rule-item.php:134
+msgid "Get"
+msgstr ""
+
+#: views/rules/rule-item.php:100
+msgid "Same Gift"
+msgstr ""
+
+#: views/rules/rule-item.php:106
+msgid "Auto Add Gift - Pro version"
+msgstr ""
+
+#: views/rules/rule-item.php:115
+msgid "Products - Buy"
+msgstr ""
+
+#: views/rules/rule-item.php:128
+msgid "Add Product"
+msgstr ""
+
+#: views/rules/rule-item.php:138
+msgid "Include Products"
+msgstr ""
+
+#: views/rules/rule-item.php:139 views/rules/rule-item.php:157
+#: views/rules/rule-item.php:175 views/rules/rule-item.php:193
+msgid "Select ..."
+msgstr ""
+
+#: views/rules/rule-item.php:156
+msgid "Exclude Products"
+msgstr ""
+
+#: views/rules/rule-item.php:174
+msgid "Include Category/Tag/Taxonomy"
+msgstr ""
+
+#: views/rules/rule-item.php:192
+msgid "Exclude Category/Tag/Taxonomy"
+msgstr ""
+
+#: views/rules/rule-item.php:213
+msgid "Conditions"
+msgstr ""
+
+#: views/rules/rule-item.php:226
+msgid "Add Condition"
+msgstr ""
+
+#: views/setting/general.php:13
+msgid "Dashboard date"
+msgstr ""
+
+#: views/setting/general.php:16
+msgid "One month ago"
+msgstr ""
+
+#: views/setting/general.php:19
+msgid "The last three months"
+msgstr ""
+
+#: views/setting/general.php:22
+msgid "The last six months"
+msgstr ""
+
+#: views/setting/general.php:25
+msgid "Nine months ago"
+msgstr ""
+
+#: views/setting/general.php:28
+msgid "Once Year Ago"
+msgstr ""
+
+#: views/setting/general.php:31
+msgid "The last two years"
+msgstr ""
+
+#: views/setting/general.php:34
+msgid "The last three years"
+msgstr ""
+
+#: views/setting/general.php:37
+msgid "Set date for dashboard report"
+msgstr ""
+
+#: views/setting/general.php:40
+msgid "Display price for gift"
+msgstr ""
+
+#: views/setting/general.php:43
+msgid "Don't Display Price"
+msgstr ""
+
+#: views/setting/general.php:46
+msgid "Strike and Display the Price"
+msgstr ""
+
+#: views/setting/general.php:49
+msgid "Display price for gifts are added to cart"
+msgstr ""
+
+#: views/setting/general.php:52
+msgid "'Your Gifts' position"
+msgstr ""
+
+#: views/setting/general.php:55
+msgid "Beside of Coupon Button"
+msgstr ""
+
+#: views/setting/general.php:58
+msgid "Bottom of Cart"
+msgstr ""
+
+#: views/setting/general.php:61
+msgid "None"
+msgstr ""
+
+#: views/setting/general.php:65
+msgid "Popup in The Cart/Checkout Page "
+msgstr ""
+
+#: views/setting/general.php:69
+msgid "Where do you want to display available gift in cart page?"
+msgstr ""
+
+#: views/setting/general.php:72
+msgid "Layout"
+msgstr ""
+
+#: views/setting/general.php:75
+msgid "Grid"
+msgstr ""
+
+#: views/setting/general.php:78
+msgid "Carousel"
+msgstr ""
+
+#: views/setting/general.php:81
+msgid "Datatable"
+msgstr ""
+
+#: views/setting/general.php:84
+msgid "Dropdown"
+msgstr ""
+
+#: views/setting/general.php:88
+msgid "Button (Display Popup)"
+msgstr ""
+
+#: views/setting/general.php:94
+msgid "Show Variations"
+msgstr ""
+
+#: views/setting/general.php:96
+msgid "Leave it if you want to show variations gifts in popup"
+msgstr ""
+
+#: views/setting/general.php:99
+msgid "Show Stock Quantity"
+msgstr ""
+
+#: views/setting/general.php:101
+msgid "If checked, 'stock status' is shown for each gift."
+msgstr ""
+
+#: views/setting/general.php:106
+msgid "Number Per Page"
+msgstr ""
+
+#: views/setting/general.php:107
+msgid "Gift Number Per Page"
+msgstr ""
+
+#: views/setting/general.php:110
+msgid "Desktop Columns"
+msgstr ""
+
+#: views/setting/general.php:113 views/setting/general.php:133
+#: views/setting/general.php:153
+msgid "6 Columns"
+msgstr ""
+
+#: views/setting/general.php:116 views/setting/general.php:136
+#: views/setting/general.php:156
+msgid "4 Columns"
+msgstr ""
+
+#: views/setting/general.php:119 views/setting/general.php:139
+#: views/setting/general.php:159
+msgid "3 Columns"
+msgstr ""
+
+#: views/setting/general.php:122 views/setting/general.php:142
+#: views/setting/general.php:162
+msgid "2 Columns"
+msgstr ""
+
+#: views/setting/general.php:125 views/setting/general.php:145
+#: views/setting/general.php:165
+msgid "1 Column"
+msgstr ""
+
+#: views/setting/general.php:130
+msgid "Tablet Columns"
+msgstr ""
+
+#: views/setting/general.php:150
+msgid "Mobile Columns"
+msgstr ""
+
+#: views/setting/general.php:172
+msgid "Loop"
+msgstr ""
+
+#: views/setting/general.php:176
+msgid "Show Dots"
+msgstr ""
+
+#: views/setting/general.php:180
+msgid "Show Nav"
+msgstr ""
+
+#: views/setting/general.php:184
+msgid "Slide Speed in Milliseconds"
+msgstr ""
+
+#: views/setting/general.php:185
+msgid "Slide Speed"
+msgstr ""
+
+#: views/setting/general.php:188
+msgid "Number Items in Mobile"
+msgstr ""
+
+#: views/setting/general.php:189 views/setting/general.php:193
+#: views/setting/general.php:197
+msgid "Number Items"
+msgstr ""
+
+#: views/setting/general.php:192
+msgid "Number Items in Tablet"
+msgstr ""
+
+#: views/setting/general.php:196
+msgid "Number Items in Desktop"
+msgstr ""
+
+#: views/setting/localization.php:13 views/setting/localization.php:14
+msgid "Free"
+msgstr ""
+
+#: views/setting/localization.php:29
+msgid "Select Your Gift ( Dropdown Layout )"
+msgstr ""
+
+#: views/setting/localization.php:30
+msgid "Select Your Gift"
+msgstr ""
+
+#: views/setting/tabs.php:3
+msgid "General"
+msgstr ""
+
+#: views/setting/tabs.php:4
+msgid "Localization"
+msgstr ""
