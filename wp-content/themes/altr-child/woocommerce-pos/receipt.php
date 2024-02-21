@@ -355,7 +355,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
 					?>
 				</td>
-				<td><?php echo wc_price( get_item_subtotal(['product_id' => $item->get_product()->id, 'quantity' => $item->get_quantity()], false) ); ?></td>
+				<td><?php echo wc_price( get_item_subtotal(['product_id' => $item->get_product()->id, 'quantity' => $item->get_quantity()]) ); ?></td>
 			</tr>
 		<?php } ?>
 		</tbody>

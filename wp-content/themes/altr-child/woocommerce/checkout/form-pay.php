@@ -32,6 +32,7 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 			<?php if ( count( $order->get_items() ) > 0 ) : ?>
 				<?php foreach ( $order->get_items() as $item_id => $item ) : ?>
 					<?php
+					$product = $item->get_product();
 					if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 						continue;
 					}
@@ -50,7 +51,7 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 						</td>
 						<td class="product-quantity"><?php echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', esc_html( $item->get_quantity() ) ) . '</strong>', $item ); ?></td><?php // @codingStandardsIgnoreLine ?>
 						<td class="product-subtotal">
-							<?php echo $order->get_formatted_line_subtotal( $item, 'incl' ); ?>
+							<?php echo wc_price( get_item_subtotal(['product_id' => $product->get_id(), 'quantity' => $item->get_quantity()]) ); ?>
 						</td>
 						<?php // @codingStandardsIgnoreLine ?>
 					</tr>
@@ -60,7 +61,15 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 		<tfoot>
 			<?php if ( $totals ) : ?>
 				<?php foreach ( $totals as $key => $total ) : ?>
-					<?php if ($key !== 'discount') : ?>
+					<?php print_r($total); ?>
+					<?php if ($key === 'cart_subtotal') : ?>
+						<tr>
+							<th scope="row" colspan="2"<?php echo strpos($key, 'iva') !== false ? 'data-is_tax_column="true"' : '' ?>>
+								<?php echo $total['label']; ?>
+							</th>
+							<td class="product-total"><?php echo wc_price( get_order_subtotal_sum($order) ); ?></td><?php // @codingStandardsIgnoreLine ?>
+						</tr>
+					<?php elseif ($key !== 'discount' && $key !== 'cart_subtotal') : ?>
 						<tr>
 							<th scope="row" colspan="2"<?php echo strpos($key, 'iva') !== false ? 'data-is_tax_column="true"' : '' ?>>
 								<?php echo $total['label']; ?>
