@@ -17,7 +17,6 @@ function observeNode(node, options) {
     
     const observer = new MutationObserver((mutationList) => {
         for (const mutation of mutationList) {
-            console.log(mutation);
             if (mutation.type === 'attributes') {
                 if (mutation.attributeName === 'disabled') {
                     if (node === updateCartButton) {
@@ -114,6 +113,15 @@ function unblock(selector) {
 }
 
 function updateQuantity(input, newQuantity) {
+    blockSections();
+
+    input.setAttribute('value', newQuantity);
+
+    quantityInputChanged = true;
+    updateItemCart(input);
+}
+
+function blockSections() {
     const advGiftSection = $('.adv-gift-section');
     const woocommerceCartTable = $('.woocommerce .shop_table.cart');
     const cartCollaterals = $('.woocommerce .cart-collaterals');
@@ -124,11 +132,6 @@ function updateQuantity(input, newQuantity) {
     if (advGiftSection) {
         block(advGiftSection);
     }
-
-    input.setAttribute('value', newQuantity);
-
-    quantityInputChanged = true;
-    updateItemCart(input);
 }
 
 function decrement(button, input) {
@@ -183,13 +186,29 @@ function loopCartItems() {
 
     items.forEach(item => {
         const qtyContainer = item.querySelector('.qty-container');
-        const removeButton = item.querySelector('.remove');
+        const removeButton = item.querySelector('#remove');
         const giftsRemoveButton = item.querySelectorAll('.remove.gift-close-link');
 
         giftsRemoveButton.forEach((button) => {
-            const id = button.getAttribute('data-id');
+            button.addEventListener('click', async function(e) {
+                e.preventDefault();
 
-            cartGiftsIds.add(id);
+                const id = button.getAttribute('data-id');
+
+                try {
+                    const result = await fetch(`<?php echo esc_url(get_home_url()); ?>/cart?it_gift_remove=${id}`, {
+                        method: 'GET'
+                    });
+    
+                    if (result.status === 200 && result.ok) {
+                        window.location = `<?php echo get_permalink(); ?>`;
+                    }
+                } catch(err) {
+                    console.log(err);
+                }
+    
+                cartGiftsIds.add(id);
+            })
         });
 
         if (qtyContainer) {
@@ -209,15 +228,24 @@ function loopCartItems() {
             checkStock(item, incrementButton);
         }
 
-        removeButton.addEventListener('click', () => {
-            if (removeButton.classList.contains('gift-close-link')) {
-                const advGiftSection = $('.adv-gift-section');
 
-                totalCartGifts = cartGiftsIds.length;
-                removedGiftId = removeButton.getAttribute('data-id');
+        removeButton.addEventListener('click', async function(e) {
+            e.preventDefault();
+            blockSections();
+            const itemSku = this.dataset['product_sku'];
+            const nonce = document.querySelector('#woocommerce-cart-nonce').value;
 
-                block(advGiftSection);
-            } 
+            try {
+                const result = await fetch(`<?php echo esc_url(get_home_url()); ?>/cart/?remove_item=${itemSku}&_wpnonce=${nonce}`, {
+                    method: 'GET'
+                });
+
+                if (result.status === 200 && result.ok) {
+                    window.location = `<?php echo get_permalink(); ?>`;
+                }
+            } catch(err) {
+                console.log(err);
+            }
         })
     });
 }

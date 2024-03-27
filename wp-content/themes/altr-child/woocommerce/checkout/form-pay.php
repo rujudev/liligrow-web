@@ -51,7 +51,7 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 						</td>
 						<td class="product-quantity"><?php echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', esc_html( $item->get_quantity() ) ) . '</strong>', $item ); ?></td><?php // @codingStandardsIgnoreLine ?>
 						<td class="product-subtotal">
-							<?php echo wc_price( get_item_subtotal(['product_id' => $product->get_id(), 'quantity' => $item->get_quantity()]) ); ?>
+						<?php echo wc_price( get_item_subtotal(['product_id' => $product->get_id(), 'variation_id' => $item->get_variation_id(), 'quantity' => $item->get_quantity()]) ); ?>
 						</td>
 						<?php // @codingStandardsIgnoreLine ?>
 					</tr>
@@ -61,7 +61,6 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 		<tfoot>
 			<?php if ( $totals ) : ?>
 				<?php foreach ( $totals as $key => $total ) : ?>
-					<?php print_r($total); ?>
 					<?php if ($key === 'cart_subtotal') : ?>
 						<tr>
 							<th scope="row" colspan="2"<?php echo strpos($key, 'iva') !== false ? 'data-is_tax_column="true"' : '' ?>>
@@ -90,14 +89,13 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 	 */
 	do_action( 'woocommerce_pay_order_before_payment' ); 
 	?>
-
 	<div id="payment">
 		<?php if ( $order->needs_payment() ) : ?>
 			<ul class="wc_payment_methods payment_methods methods">
 				<?php
 				if ( ! empty( $available_gateways ) ) {
 					foreach ( $available_gateways as $gateway ) {
-						wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
+						wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway, 'order' => $order ) );
 					}
 				} else {
 					echo '<li>';

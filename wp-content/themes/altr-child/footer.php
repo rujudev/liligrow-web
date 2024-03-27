@@ -66,7 +66,7 @@
                 <ul class="c-flex m-0 gap-16">
                     <?php if (is_user_logged_in()): ?>
                         <li id="my-profile">
-                            <a href="<?php echo home_url() . "/my-profile" ?>">
+                            <a href="<?php echo home_url() . "/mi-perfil" ?>">
                                 <span>Mi Perfil</span>
                             </a>
                         </li>
@@ -77,18 +77,18 @@
                         </li>
                     <?php else: ?>
                         <li id="login">
-                            <a href="<?php echo home_url() . "/my-profile" ?>">
+                            <a href="<?php echo home_url() . "/mi-perfil" ?>">
                                 <span>Iniciar Sesión</span>
                             </a>
                         </li>
                     <?php endif; ?>
                     <li id="about-us">
-                        <a href="<?php echo home_url() . "/about-us" ?>">
+                        <a href="<?php echo home_url() . "/quienes-somos" ?>">
                             <span>Quienes Somos</span>
                         </a>
                     </li>
                     <li id="faqs">
-                        <a href="<?php echo home_url() . "/frequent-asked-questions" ?>">
+                        <a href="<?php echo home_url() . "/preguntas-frecuentes" ?>">
                             <span>FAQ's</span>
                         </a>
                     </li>
@@ -113,7 +113,7 @@
                         <div class="c-flex gap-4">
                             <h4 class="m-0 title">Teléfono</h4>
                             <span class="text">
-                                <a href="tel:+64622781993">603014125</a>
+                                <a href="tel:+64603014125">603014125</a>
                             </span>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                         <div class="c-flex gap-4">
                             <h4 class="m-0 title">Dirección</h4>
                             <span class="text">
-                                <a href="tel:+64622781993">C/ Maestro Serrano 3, local 2</a>
+                                <a href="https://maps.app.goo.gl/5XwDG1SgQ1oskGbM6">C/ Maestro Serrano 3, local 2</a>
                             </span>
                         </div>
                     </div>
@@ -178,13 +178,13 @@
     src="https://www.liligrow.es/wp-content/themes/altr-child/assets/js/observer.js"></script>
 
 <?php wp_footer(); ?>
-<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() . '/assets/js/custom-add-to-cart.min.js'; ?>"></script>
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() . '/assets/js/custom-add-to-cart.js'; ?>"></script>
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() . '/assets/js/custom-site-menu.min.js'; ?>"></script>
 
-<?php if (is_page('home') || is_page('ruta-desarrollo-pagina-inicio')): ?>
+<?php if (is_page('inicio')): ?>
     <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() . '/assets/js/custom-home-top-slider.min.js'; ?>"></script>
     <script>
-        fetch('https://www.liligrow.es/wp-json/wc-analytics/reports/products?orderby=items_sold&order=desc&after=2024-01-01T00%3A00%3A00&page=1&per_page=10&extended_info=true&_locale=user', {
+        fetch('https://www.liligrow.es/wp-json/wc-analytics/reports/products?orderby=items_sold&order=desc&after=2024-01-01T00%3A00%3A00&page=1&per_page=12&extended_info=true&_locale=user', {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + btoa('ck_968f11dd925c7b4e39e8739606395e17753d940d' + ':' + 'cs_faa2de6e8fc676becdf65ed16bd4c46f1a97a90c'),
@@ -208,22 +208,50 @@
                     container.innerHTML = sanitiziedHTML;
                 });
             })
+
+        fetch('https://www.liligrow.es/wp-json/quadlayers/tiktok/frontend/user-video-list',{
+            method: 'POST',
+            body: JSON.stringify(({
+                createTime: null,
+                feedSettings: {
+                    id: 1,
+                    source: "account",
+                    open_id: "_000FXqL16Uop6xLIdYWF-5qJHEpcd35JvWa",
+                    region: "US",
+                    hashtag: "WordPress",
+                    username: "liligrow",
+                    create_time: 0,
+                    layout: "masonry",
+                    limit: 12,
+                    columns: 3,
+                    hide_carousel_feed: true,
+                    lazy: true,
+                }
+            }))
+        }).then(response => response.text())
+        .then(text => {
+            const feeds = JSON.parse(text.substring(text.indexOf('[{"id":'), text.length));
+            const tikTokSection = document.querySelector('#tiktok-section');
+
+            console.log(feeds);
+        });
     </script>
 <?php endif; ?>
 
 <?php if (is_page('cart')): ?>
     <?php $nonce = wp_create_nonce("wc_store_api"); ?>
     <script id="custom-cart-script">
-		const $=t=>document.querySelector(t),isValid="<?php echo wp_verify_nonce($nonce, 'wc_store_api'); ?>";let submitCompleteNotice,widgetContainer;const headerRight=document.querySelector(".header-right"),couponInput=$(".woocommerce-cart-form .coupon #coupon_code");let updateCartButton=null,removedGiftId=null,isCartEmpty=!1,cartGiftsIds=null,totalCartGifts=0,quantityInputChanged=!1;function observeNode(t,e){if(!t)return;new MutationObserver((e=>{for(const o of e)if(console.log(o),"attributes"===o.type&&"disabled"===o.attributeName&&t===updateCartButton&&updateCartButton.removeAttribute("disabled"),"childList"===o.type){t===submitCompleteNotice&&(updateCartButton=$("button[name=update_cart]"),updateCartButton.removeAttribute("disabled"),quantityInputChanged=!1,loopCartItems(),checkGiftsSection());const e=t.querySelector(".woocommerce"),o=t.querySelector(".return-to-shop");if(o){e.setAttribute("style","display: flex; flex-direction: column;"),e.querySelector(".wc-empty-cart-message").remove();o.querySelector("a.button.wc-backward").setAttribute("href","https://www.liligrow.es")}}})).observe(t,e)}function checkGiftsSection(){const t=$(".adv-gift-section");if(t){const e=t.querySelectorAll(".owl-stage .owl-item"),o=Array.from(e);for(const t of o){const e=t.querySelector(".wgb-product-item-cnt"),o=t.querySelector(".wgb-add-gift-btn").getAttribute("data-id");cartGiftsIds.has(o)||e.classList.replace("disable-hover","hovering")}unblock(t)}}async function updateItemCart(t){const e=t.getAttribute("value"),o=t.getAttribute("name").match(/\[(.*?)\]/)[1];if(isValid)try{const t=await fetch(`<?php echo esc_url(get_home_url()); ?>/wp-json/wc/store/v1/cart/update-item?key=${o}&quantity=${e}`,{method:"POST",headers:{"Content-Type":"application/json",Nonce:"<?php echo esc_attr($nonce); ?>"}});200===t.status&&t.ok&&(window.location="<?php echo get_permalink(); ?>")}catch(t){console.log(t)}}function block(t){t&&jQuery(t).addClass("loading").block({message:null,overlayCSS:{background:"#fff",opacity:.6}})}function unblock(t){t&&jQuery(t).removeClass("loading").unblock()}function updateQuantity(t,e){const o=$(".adv-gift-section"),c=$(".woocommerce .shop_table.cart"),n=$(".woocommerce .cart-collaterals");block(c),block(n),o&&block(o),t.setAttribute("value",e),quantityInputChanged=!0,updateItemCart(t)}function decrement(t,e){const o=parseInt(e.value);o>1&&!quantityInputChanged&&updateQuantity(e,o-1)}function increment(t,e){const o=parseInt(e.value);quantityInputChanged||updateQuantity(e,o+1)}function checkStock(t,e){const o=t.querySelector('input[type="number"]'),c=parseInt(o.getAttribute("value")),n=parseInt(o.getAttribute("max"));if(Boolean(n)){const o=t.querySelector(".qty-container");let r=o.querySelector(".stock-limit");r&&o.removeChild(r),c===n?(e.setAttribute("disabled","disabled"),e.classList.add("disabled"),r=document.createElement("span"),r.classList.add("stock-limit"),r.textContent='<?php esc_html_e("Stock limit reached", "woocommerce"); ?>',o.appendChild(r)):n>c&&(e.removeAttribute("disabled"),e.classList.remove("disabled"))}}function loopCartItems(){cartGiftsIds=new Set;document.querySelectorAll(".woocommerce-cart-form__cart-item").forEach((t=>{const e=t.querySelector(".qty-container"),o=t.querySelector(".remove");if(t.querySelectorAll(".remove.gift-close-link").forEach((t=>{const e=t.getAttribute("data-id");cartGiftsIds.add(e)})),e){const o=e.querySelector("input[type=number]"),c=t.querySelector("button.decrement"),n=t.querySelector("button.increment");c.addEventListener("click",(()=>{decrement(this,o)})),n.addEventListener("click",(()=>{increment(this,o)})),checkStock(t,n)}o.addEventListener("click",(()=>{if(o.classList.contains("gift-close-link")){const t=$(".adv-gift-section");totalCartGifts=cartGiftsIds.length,removedGiftId=o.getAttribute("data-id"),block(t)}}))}))}couponInput.classList.add("woocommerce-Input","woocommerce-Input--text"),document.addEventListener("DOMContentLoaded",(function(){submitCompleteNotice=$(".woocommerce .woocommerce-notices-wrapper"),widgetContainer=$(".elementor-widget-container"),updateCartButton=$("button[name=update_cart]"),observeNode(updateCartButton,{attributes:!0,attributeFilter:["disabled"]}),observeNode(submitCompleteNotice,{childList:!0}),observeNode(widgetContainer,{childList:!0}),loopCartItems()}));
+		const $=t=>document.querySelector(t),isValid="<?php echo wp_verify_nonce($nonce, 'wc_store_api'); ?>";let submitCompleteNotice,widgetContainer;const headerRight=document.querySelector(".header-right"),couponInput=$(".woocommerce-cart-form .coupon #coupon_code");let updateCartButton=null,removedGiftId=null,isCartEmpty=!1,cartGiftsIds=null,totalCartGifts=0,quantityInputChanged=!1;function observeNode(t,e){if(!t)return;new MutationObserver((e=>{for(const o of e)if("attributes"===o.type&&"disabled"===o.attributeName&&t===updateCartButton&&updateCartButton.removeAttribute("disabled"),"childList"===o.type){t===submitCompleteNotice&&(updateCartButton=$("button[name=update_cart]"),updateCartButton.removeAttribute("disabled"),quantityInputChanged=!1,loopCartItems(),checkGiftsSection());const e=t.querySelector(".woocommerce"),o=t.querySelector(".return-to-shop");if(o){e.setAttribute("style","display: flex; flex-direction: column;"),e.querySelector(".wc-empty-cart-message").remove();o.querySelector("a.button.wc-backward").setAttribute("href","https://www.liligrow.es")}}})).observe(t,e)}function checkGiftsSection(){const t=$(".adv-gift-section");if(t){const e=t.querySelectorAll(".owl-stage .owl-item"),o=Array.from(e);for(const t of o){const e=t.querySelector(".wgb-product-item-cnt"),o=t.querySelector(".wgb-add-gift-btn").getAttribute("data-id");cartGiftsIds.has(o)||e.classList.replace("disable-hover","hovering")}unblock(t)}}async function updateItemCart(t){const e=t.getAttribute("value"),o=t.getAttribute("name").match(/\[(.*?)\]/)[1];if(isValid)try{const t=await fetch(`<?php echo esc_url(get_home_url()); ?>/wp-json/wc/store/v1/cart/update-item?key=${o}&quantity=${e}`,{method:"POST",headers:{"Content-Type":"application/json",Nonce:"<?php echo esc_attr($nonce); ?>"}});200===t.status&&t.ok&&(window.location="<?php echo get_permalink(); ?>")}catch(t){console.log(t)}}function block(t){t&&jQuery(t).addClass("loading").block({message:null,overlayCSS:{background:"#fff",opacity:.6}})}function unblock(t){t&&jQuery(t).removeClass("loading").unblock()}function updateQuantity(t,e){blockSections(),t.setAttribute("value",e),quantityInputChanged=!0,updateItemCart(t)}function blockSections(){const t=$(".adv-gift-section"),e=$(".woocommerce .shop_table.cart"),o=$(".woocommerce .cart-collaterals");block(e),block(o),t&&block(t)}function decrement(t,e){const o=parseInt(e.value);o>1&&!quantityInputChanged&&updateQuantity(e,o-1)}function increment(t,e){const o=parseInt(e.value);quantityInputChanged||updateQuantity(e,o+1)}function checkStock(t,e){const o=t.querySelector('input[type="number"]'),c=parseInt(o.getAttribute("value")),n=parseInt(o.getAttribute("max"));if(Boolean(n)){const o=t.querySelector(".qty-container");let r=o.querySelector(".stock-limit");r&&o.removeChild(r),c===n?(e.setAttribute("disabled","disabled"),e.classList.add("disabled"),r=document.createElement("span"),r.classList.add("stock-limit"),r.textContent='<?php esc_html_e("Stock limit reached", "woocommerce"); ?>',o.appendChild(r)):n>c&&(e.removeAttribute("disabled"),e.classList.remove("disabled"))}}function loopCartItems(){cartGiftsIds=new Set;document.querySelectorAll(".woocommerce-cart-form__cart-item").forEach((t=>{const e=t.querySelector(".qty-container"),o=t.querySelector("#remove");if(t.querySelectorAll(".remove.gift-close-link").forEach((t=>{t.addEventListener("click",(async function(e){e.preventDefault();const o=t.getAttribute("data-id");try{const t=await fetch(`<?php echo esc_url(get_home_url()); ?>/cart?it_gift_remove=${o}`,{method:"GET"});200===t.status&&t.ok&&(window.location="<?php echo get_permalink(); ?>")}catch(t){console.log(t)}cartGiftsIds.add(o)}))})),e){const o=e.querySelector("input[type=number]"),c=t.querySelector("button.decrement"),n=t.querySelector("button.increment");c.addEventListener("click",(()=>{decrement(this,o)})),n.addEventListener("click",(()=>{increment(this,o)})),checkStock(t,n)}o.addEventListener("click",(async function(t){t.preventDefault(),blockSections();const e=this.dataset.product_sku,o=document.querySelector("#woocommerce-cart-nonce").value;try{const t=await fetch(`<?php echo esc_url(get_home_url()); ?>/cart/?remove_item=${e}&_wpnonce=${o}`,{method:"GET"});200===t.status&&t.ok&&(window.location="<?php echo get_permalink(); ?>")}catch(t){console.log(t)}}))}))}couponInput.classList.add("woocommerce-Input","woocommerce-Input--text"),document.addEventListener("DOMContentLoaded",(function(){submitCompleteNotice=$(".woocommerce .woocommerce-notices-wrapper"),widgetContainer=$(".elementor-widget-container"),updateCartButton=$("button[name=update_cart]"),observeNode(updateCartButton,{attributes:!0,attributeFilter:["disabled"]}),observeNode(submitCompleteNotice,{childList:!0}),observeNode(widgetContainer,{childList:!0}),loopCartItems()}));
+        //const $=t=>document.querySelector(t),isValid="<?php echo wp_verify_nonce($nonce, 'wc_store_api'); ?>";let submitCompleteNotice,widgetContainer;const headerRight=document.querySelector(".header-right"),couponInput=$(".woocommerce-cart-form .coupon #coupon_code");let updateCartButton=null,removedGiftId=null,isCartEmpty=!1,cartGiftsIds=null,totalCartGifts=0,quantityInputChanged=!1;function observeNode(t,e){if(!t)return;new MutationObserver((e=>{for(const o of e)if(console.log(o),"attributes"===o.type&&"disabled"===o.attributeName&&t===updateCartButton&&updateCartButton.removeAttribute("disabled"),"childList"===o.type){t===submitCompleteNotice&&(updateCartButton=$("button[name=update_cart]"),updateCartButton.removeAttribute("disabled"),quantityInputChanged=!1,loopCartItems(),checkGiftsSection());const e=t.querySelector(".woocommerce"),o=t.querySelector(".return-to-shop");if(o){e.setAttribute("style","display: flex; flex-direction: column;"),e.querySelector(".wc-empty-cart-message").remove();o.querySelector("a.button.wc-backward").setAttribute("href","https://www.liligrow.es")}}})).observe(t,e)}function checkGiftsSection(){const t=$(".adv-gift-section");if(t){const e=t.querySelectorAll(".owl-stage .owl-item"),o=Array.from(e);for(const t of o){const e=t.querySelector(".wgb-product-item-cnt"),o=t.querySelector(".wgb-add-gift-btn").getAttribute("data-id");cartGiftsIds.has(o)||e.classList.replace("disable-hover","hovering")}unblock(t)}}async function updateItemCart(t){const e=t.getAttribute("value"),o=t.getAttribute("name").match(/\[(.*?)\]/)[1];if(isValid)try{const t=await fetch(`<?php echo esc_url(get_home_url()); ?>/wp-json/wc/store/v1/cart/update-item?key=${o}&quantity=${e}`,{method:"POST",headers:{"Content-Type":"application/json",Nonce:"<?php echo esc_attr($nonce); ?>"}});200===t.status&&t.ok&&(window.location="<?php echo get_permalink(); ?>")}catch(t){console.log(t)}}function block(t){t&&jQuery(t).addClass("loading").block({message:null,overlayCSS:{background:"#fff",opacity:.6}})}function unblock(t){t&&jQuery(t).removeClass("loading").unblock()}function updateQuantity(t,e){const o=$(".adv-gift-section"),c=$(".woocommerce .shop_table.cart"),n=$(".woocommerce .cart-collaterals");block(c),block(n),o&&block(o),t.setAttribute("value",e),quantityInputChanged=!0,updateItemCart(t)}function decrement(t,e){const o=parseInt(e.value);o>1&&!quantityInputChanged&&updateQuantity(e,o-1)}function increment(t,e){const o=parseInt(e.value);quantityInputChanged||updateQuantity(e,o+1)}function checkStock(t,e){const o=t.querySelector('input[type="number"]'),c=parseInt(o.getAttribute("value")),n=parseInt(o.getAttribute("max"));if(Boolean(n)){const o=t.querySelector(".qty-container");let r=o.querySelector(".stock-limit");r&&o.removeChild(r),c===n?(e.setAttribute("disabled","disabled"),e.classList.add("disabled"),r=document.createElement("span"),r.classList.add("stock-limit"),r.textContent='<?php esc_html_e("Stock limit reached", "woocommerce"); ?>',o.appendChild(r)):n>c&&(e.removeAttribute("disabled"),e.classList.remove("disabled"))}}function loopCartItems(){cartGiftsIds=new Set;document.querySelectorAll(".woocommerce-cart-form__cart-item").forEach((t=>{const e=t.querySelector(".qty-container"),o=t.querySelector(".remove");if(t.querySelectorAll(".remove.gift-close-link").forEach((t=>{const e=t.getAttribute("data-id");cartGiftsIds.add(e)})),e){const o=e.querySelector("input[type=number]"),c=t.querySelector("button.decrement"),n=t.querySelector("button.increment");c.addEventListener("click",(()=>{decrement(this,o)})),n.addEventListener("click",(()=>{increment(this,o)})),checkStock(t,n)}o.addEventListener("click",(()=>{if(o.classList.contains("gift-close-link")){const t=$(".adv-gift-section");totalCartGifts=cartGiftsIds.length,removedGiftId=o.getAttribute("data-id"),block(t)}}))}))}couponInput.classList.add("woocommerce-Input","woocommerce-Input--text"),document.addEventListener("DOMContentLoaded",(function(){submitCompleteNotice=$(".woocommerce .woocommerce-notices-wrapper"),widgetContainer=$(".elementor-widget-container"),updateCartButton=$("button[name=update_cart]"),observeNode(updateCartButton,{attributes:!0,attributeFilter:["disabled"]}),observeNode(submitCompleteNotice,{childList:!0}),observeNode(widgetContainer,{childList:!0}),loopCartItems()}));
 	</script>
 <?php endif; ?>
 
-<script type="text/javascript">
+<script type="text/javascript">	
     const year = new Date().getFullYear()
     document.getElementById('year').innerText = year.toLocaleString();
 
-    const novedades = document.querySelector('#menu-item-7996');
-    novedades.querySelector('a').setAttribute('href', 'https://liligrow.es/tienda?orderby=date');
+    const novedades = document.querySelectorAll('.menu-item-7996');
+	novedades.forEach(link => link.querySelector('a').setAttribute('href', 'https://liligrow.es/tienda?orderby=date'));
 </script>
 </body>
 

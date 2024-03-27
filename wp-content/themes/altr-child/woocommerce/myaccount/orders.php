@@ -55,10 +55,13 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 							<?php elseif ( 'order-status' === $column_id ) : ?>
 								<span class="status-<?php print_r($order->get_status() ); ?>"><?php echo esc_html( wc_get_order_status_name( $order->get_status() ) ); ?></span>
 							<?php elseif ( 'order-total' === $column_id ) : ?>
-								<?php
-								/* translators: 1: formatted order total 2: total order items */
-								echo wp_kses_post( sprintf( _n( '%1$s for %2$s item', '%1$s for %2$s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ) );
-								?>
+								<div class="order-total-container">
+									<?php
+									/* translators: 1: formatted order total 2: total order items */
+									echo $order->get_formatted_order_total();
+									echo '<small>(' . wp_kses_post( sprintf( _n( '%1$s item', '%1$s items', $item_count, 'woocommerce' ), $item_count) ) . ')</small>';
+									?>
+								</div>
 
 							<?php elseif ( 'order-actions' === $column_id ) : ?>
 								<?php
@@ -66,7 +69,8 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 
 								if ( ! empty( $actions ) ) {
 									foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-										echo '<a href="' . esc_url( $action['url'] ) . '" class="woocommerce-button' . esc_attr( $wp_button_class ) . ' button ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';
+										$icon = $key === 'view' ? '<i class="las la-external-link-alt la-2x"></i>' : '';
+										echo '<a href="' . esc_url( $action['url'] ) . '">' . $icon . '</a>';
 									}
 								}
 								?>
@@ -82,17 +86,13 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 
 	<?php do_action( 'woocommerce_before_account_orders_pagination' ); ?>
 
-	<?php if ( 1 < $customer_orders->max_num_pages ) : ?>
-		<div class="woocommerce-pagination woocommerce-pagination--without-numbers woocommerce-Pagination">
-			<?php if ( 1 !== $current_page ) : ?>
-				<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page - 1 ) ); ?>"><?php esc_html_e( 'Previous', 'woocommerce' ); ?></a>
-			<?php endif; ?>
-
-			<?php if ( intval( $customer_orders->max_num_pages ) !== $current_page ) : ?>
-				<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page + 1 ) ); ?>"><?php esc_html_e( 'Next', 'woocommerce' ); ?></a>
-			<?php endif; ?>
-		</div>
-	<?php endif; ?>
+	<?php 
+		do_action('custom_orders_pagination', array(
+			'current_page' => $current_page, 
+			'max_num_pages' => $customer_orders->max_num_pages, 
+			'base' => wc_get_account_endpoint_url('pedidos'))
+		); 
+	?>
 
 <?php else : ?>
 

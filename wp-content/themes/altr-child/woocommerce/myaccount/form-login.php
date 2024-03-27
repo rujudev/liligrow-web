@@ -186,11 +186,11 @@ do_action('woocommerce_before_customer_login_form'); ?>
                 <?php if ('no' === get_option('woocommerce_registration_generate_password')): ?>
 
                     <div class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                        <label for="reg_password">
+                        <label for="custom_reg_password">
                             <?php esc_html_e('Password', 'woocommerce'); ?>&nbsp;<span class="required">*</span>
                         </label>
                         <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password"
-                            id="reg_password" autocomplete="new-password" />
+                            id="custom_reg_password" autocomplete="new-password" />
                     </div>
 
                 <?php else: ?>
@@ -220,3 +220,52 @@ do_action('woocommerce_before_customer_login_form'); ?>
 <?php endif; ?>
 
 <?php do_action('woocommerce_after_customer_login_form'); ?>
+
+<script>
+    const passwordContainer = document.querySelector('.woocommerce-form-row.woocommerce-form-row--wide.form-row.form-row-wide');
+    const passwordInput = document.querySelector('input#custom_reg_password');
+    const submitButton = document.querySelector('button[name=register]');
+    let passwordStrength = null;
+    let passwordHint = null;
+    
+    
+    passwordInput.addEventListener('keyup', function(e) {
+        const passwordLength = e.target.value.length;
+        const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/;
+        
+        if (passwordLength === 0 && passwordStrength) {
+            passwordStrength.remove();
+            passwordHint.remove();
+        } else {
+            if (passwordLength >= 1 && !passwordStrength) {
+                passwordStrength = document.createElement('div');
+                passwordHint = document.createElement('small');
+                passwordStrength.classList.add('woocommerce-password-strength');
+                passwordHint.classList.add('woocommerce-password-hint');
+                passwordHint.innerHTML = '<span>La contraseña debe tener al menos 7 caracteres y debe incluir una combinación de letras mayúsculas y minúsculas, así como al menos un número. Puedes hacerla más segura utilizando una mezcla de caracteres alfabéticos y numéricos. Evita el uso de espacios y caracteres especiales para mejorar la robustez de tu contraseña.</span>';
+            }
+    
+            if (passwordLength <= 3) {
+                passwordStrength.classList.add('short')
+                passwordStrength.innerText = 'Muy débil - Por favor, introduce una contraseña más fuerte.';
+            } else if(passwordLength > 4 && passwordLength < 6) {
+                passwordStrength.classList.remove('short')
+                passwordStrength.classList.remove('strong')
+                passwordStrength.classList.add('bad')
+                passwordStrength.innerText = 'Débil - Por favor, introduce una contraseña más fuerte.';
+            } else if(regexPassword.test(e.target.value)) {
+                passwordStrength.classList.remove('bad')
+                passwordStrength.classList.add('strong')
+                passwordStrength.innerText = 'Fuerte.';
+            }
+    
+            passwordInput.after(passwordStrength);
+            passwordStrength.after(passwordHint);
+        }
+
+        !regexPassword.test(e.target.value) 
+            ? submitButton.setAttribute('disabled', 'disabled')
+            : submitButton.removeAttribute('disabled');
+        
+    });
+</script>

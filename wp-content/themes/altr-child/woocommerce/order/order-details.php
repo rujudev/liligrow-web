@@ -48,6 +48,7 @@ if ( $show_downloads ) {
 
 		<thead>
 			<tr>
+				<th class="woocommerce-table__product-thumbnail product-thumnail"><?php esc_html_e( 'Thumbnail', 'woocommerce' ); ?></th>
 				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
 				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
 			</tr>
@@ -83,7 +84,7 @@ if ( $show_downloads ) {
 				?>
 					<tr>
 						<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
-						<td><?php echo wp_kses_post( $total['value'] ); ?></td>
+						<td colspan="2" align="right"><?php echo wp_kses_post( $total['value'] ); ?></td>
 					</tr>
 					<?php
 			}
@@ -109,6 +110,6 @@ if ( $show_downloads ) {
  */
 do_action( 'woocommerce_after_order_details', $order );
 
-if ( $show_customer_details ) {
-	wc_get_template( 'order/order-details-customer.php', array( 'order' => $order ) );
-}
+// if ( $show_customer_details ) {
+// 	wc_get_template( 'order/order-details-customer.php', array( 'order' => $order ) );
+// }

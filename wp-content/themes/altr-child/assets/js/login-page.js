@@ -1,18 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
   let age = 0;
+
   const nowDate = new Date().getTime();
   const dateOfBirthField = document.getElementsByName(
     "account_date_of_birth"
-  )[0];
+    )[0];
   const registerBtn = document.querySelector('.register button[type="submit"]');
 
+  function setAge(value) {
+    const selectedDate = new Date(value).getTime();
+    const ageInMiliseconds = nowDate - selectedDate;
+    age = parseInt(ageInMiliseconds / (1000 * 60 * 60 * 24 * 365.25));
+  }
+
   if (dateOfBirthField) {
-    dateOfBirthField.addEventListener("keyup", function (e) {
-      const target = e.target;
-      const selectedDate = new Date(target.value).getTime();
-      const ageInMiliseconds = nowDate - selectedDate;
-      age = parseInt(ageInMiliseconds / (1000 * 60 * 60 * 24 * 365.25));
-    });
+    dateOfBirthField.addEventListener("keyup", ({ target }) => setAge(target.value));
+    dateOfBirthField.addEventListener('input', ({ target }) => setAge(target.value))
   }
 
   if (registerBtn) {
@@ -27,6 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const dateOfBirthField = document.querySelector(
         '.register input[name="account_date_of_birth"]'
       );
+
+      setAge(dateOfBirthField.value)
+
+      console.log(age);
   
       if (
         nameField.value !== "" &&

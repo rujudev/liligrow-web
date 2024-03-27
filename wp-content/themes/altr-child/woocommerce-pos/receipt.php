@@ -327,21 +327,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</thead>
 		<tbody>
 		<?php foreach ( $order->get_items() as $item_id => $item ) { ?>
-			<?php 
-				$product_id = $item->get_product_id();
-				$variation_id = $item->get_variation_id();
-				$product = $item->get_product(); // see link above to get $product info
-				$product_name = $item->get_name();
-				$quantity = $item->get_quantity();
-				$subtotal = $item->get_subtotal();
-				$total = $item->get_total();
-				$tax = $item->get_subtotal_tax();
-				$tax_class = $item->get_tax_class();
-				$tax_status = $item->get_tax_status();
-				$allmeta = $item->get_meta_data();
-				$somemeta = $item->get_meta( '_whatever', true );
-				$item_type = $item->get_type(); // e.g. "line_item", "fee"
-			?>
 			<tr>
 				<td><?php echo esc_html( $item->get_quantity() ); ?></td>
 				<td>
@@ -355,17 +340,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 						do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
 					?>
 				</td>
-				<td><?php echo wc_price( get_item_subtotal(['product_id' => $item->get_product()->id, 'quantity' => $item->get_quantity()]) ); ?></td>
+				<td>
+					<?php 
+						echo wc_price( get_item_subtotal([
+							'product_id' => $item->get_product()->id, 
+							'variation_id' => $item->get_variation_id(), 
+							'quantity' => $item->get_quantity()
+						]) ); 
+					?>
+				</td>
 			</tr>
 		<?php } ?>
 		</tbody>
 	</table>
 
 	<div class="order-totals">
-		<?php $totals = $order->get_order_item_totals( ); ?>
-		<?php 
-			get_order_total_sum($order);
-		?>
+		<?php $totals = $order->get_order_item_totals( 'incl' ); ?>
 		<div id="subtotal">
 			<strong><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></strong>
 			<span><?php echo wp_kses_post( wc_price( get_order_subtotal_sum($order) ) ); ?></span>
@@ -387,7 +377,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php endif; ?>
 		<div id="total">
 			<strong><?php esc_html_e( 'Total', 'woocommerce' ); ?></strong>
-			<span><?php echo wc_price( get_order_total_sum($order) ); ?></span>
+			<span><?php echo wp_kses_post( wc_price( $order->get_total() ) ); ?></span>
 		</div>
 		<?php if ( $order->get_payment_method() === 'pos_cash'): ?>
 			<div id="pos_cash">

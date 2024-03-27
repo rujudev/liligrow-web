@@ -20,6 +20,7 @@ const Toast = Swal.mixin({
     confirmButtonText: 'Ver carrito',
     confirmButtonColor: '#197900',
 });
+
 const addToCartButtonObserver = new MutationObserver(async (mutations) => {
     for (const mutation of mutations) {
         if (mutation.type === 'attributes') {
@@ -31,12 +32,8 @@ const addToCartButtonObserver = new MutationObserver(async (mutations) => {
                 name = itemName.split('“')[1].split('”')[0];
             }
 
-            // Dar una vuelta para usar el quantity input en la página de producto simple y variable
-
             if (button.classList.contains('added')) {
                 const productId = button.dataset['product_id'];
-
-                //document.querySelector('.added_to_cart.wc-forward')?.remove();
 
                 const result = await fetch(`https://liligrow.es/wp-json/wc/store/v1/products/${productId}`, {
                     method: 'GET'
@@ -64,16 +61,17 @@ const addToCartButtonObserver = new MutationObserver(async (mutations) => {
                             newQuantity = parseInt(quantityInput.getAttribute('value'));
                             const productPrice = parseFloat(quantityInput.getAttribute('data-product_price')).toFixed(2);
                             productSalePrice = parseFloat(parseFloat(productPrice) * newQuantity).toFixed(2);
-
-                            console.log({ newQuantity, productPrice, productSalePrice, miniCartContentAmountPrice });
                         }
                     }
                     
                     topHeaderMiniCartQtyElement.innerText = topHeaderMiniCartQtyTotal + newQuantity;
                     miniCartContentCountElement.innerText = miniCartContentCountTotal + newQuantity;
                     miniCartContentAmountElement.innerText = `${parseFloat(parseFloat(productSalePrice) + miniCartContentAmountPrice).toFixed(2).replace('.', ',')}€`;
-                    quantityInput.setAttribute('value', 1);
-                    quantityInput.value = 1;
+                    
+                    if (quantityInput) {
+                        quantityInput.setAttribute('value', 1);
+                        quantityInput.value = 1;
+                    }
 
                     const { isConfirmed } = await Toast.fire({
                         icon: 'success',

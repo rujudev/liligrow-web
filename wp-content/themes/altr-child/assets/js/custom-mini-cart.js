@@ -1,7 +1,7 @@
 document.querySelectorAll('.woocommerce-mini-cart-item').forEach(item => {
     let decrementButton = item.querySelector('button.decrement');
     let incrementButton = item.querySelector('button.increment');
-    let removeButton = item.querySelector('a.remove');
+    let removeButton = item.querySelector('.remove');
 
     let quantityContainer = item.querySelector('.qty-container');
     let quantityResult = quantityContainer.querySelector('.qty-result');

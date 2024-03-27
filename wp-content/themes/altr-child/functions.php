@@ -2,15 +2,14 @@
 
 include_once( ABSPATH . 'wp-admin/includes/admin.php' );
 require_once ABSPATH . 'vendor/autoload.php';
-require_once WP_CONTENT_DIR . '/plugins/woocommerce-advanced-free-shipping/libraries/wp-conditions/conditions/wpc-condition.php';
+//include_once WP_CONTENT_DIR . '/plugins/woocommerce-advanced-free-shipping/libraries/wp-conditions/conditions/wpc-condition.php';
 use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
 use Automattic\WooCommerce\StoreApi\Utilities\CartController;
 
-class Custom_WPC_Conditions extends WPC_Condition {}
+//class Custom_WPC_Conditions extends WPC_Condition {}
 
-enum CurrencyPosOption: string
-{
+enum CurrencyPosOption: string {
 	case LEFT = 'left';
 	case RIGHT = 'right';
 	case LEFT_SPACE = 'left_space';
@@ -22,8 +21,7 @@ enum CurrencyPosOption: string
  *
  * @package altr
  */
-function altr_child_enqueue_styles()
-{
+function altr_child_enqueue_styles() {
 
 	$parent_style = 'entr-stylesheet';
 
@@ -39,8 +37,7 @@ function altr_child_enqueue_styles()
 
 add_action('wp_enqueue_scripts', 'altr_child_enqueue_styles');
 
-function altr_child_enqueue_scripts()
-{
+function altr_child_enqueue_scripts() {
 	wp_register_script('sweetalert-js', 'https://cdn.jsdelivr.net/npm/sweetalert2@11', array(), null, true);
 	wp_enqueue_script('sweetalert-js');
 }
@@ -50,8 +47,7 @@ add_action('wp_enqueue_scripts', 'altr_child_enqueue_scripts');
 /**
  * Set the content width based on enabled sidebar
  */
-function entr_main_content_width_columns()
-{
+function entr_main_content_width_columns() {
 
 	$columns = '12';
 	$hide_sidebar = get_post_meta(get_the_ID(), 'envo_extra_hide_sidebar', true);
@@ -66,8 +62,7 @@ function entr_main_content_width_columns()
 
 add_action('after_setup_theme', 'altr_setup');
 
-function altr_setup()
-{
+function altr_setup() {
 	
 	// Remove parent theme header fields
 	remove_action('entr_header', 'entr_title_logo', 10);
@@ -135,7 +130,6 @@ function altr_setup()
 }
 
 if ( !function_exists( 'altr_featured_image' ) ) :
-
 	/**
 	 * Generate featured image.
 	 */
@@ -191,26 +185,98 @@ function new_woocommerce_instance() {
 	);
 }
 
-function order_array_desc($a, $b) {
-	return $b->quantity - $a->quantity;
+function orderByQuantity($a, $b) {
+	$quantity_a = $a['quantity'];
+	$quantity_b = $b['quantity'];
+
+	return $quantity_b - $quantity_a;
 }
 
-function woocommerce_rest_api_shortcode($atts, $results)
-{
-	// tengo los productos ya en $results, pero falta pintarlos
-	$results = stripcslashes($results);
-	$results = json_decode($results);
+function orderByPrice($a, $b) {
+	$productA = wc_get_product($a->product_id);
+	$productB = wc_get_product($b->product_id);
+	$priceA = floatval($productA->get_price());
+	$priceB = floatval($productB->get_price());
+
+	if ($priceB == $priceA) {
+		return 0;
+	}
+
+	return ($priceB > $priceA) ? 1 : -1;
+}
+
+function woocommerce_rest_api_shortcode($atts, $results) {
+	$products = [];
 	$woocommerce = new_woocommerce_instance();
+	$fechaActual = new DateTime();
+	$fechaMenosDosSemanas = clone $fechaActual;
+	$fechaMenosDosSemanas->sub(new DateInterval('P2W'));
+	
+	// Formatear las fechas como cadenas en el formato requerido por la API
+	$fechaActualFormatted = $fechaActual->format('Y-m-d');
+	$fechaMenosDosSemanasFormatted = $fechaMenosDosSemanas->format('Y-m-d');
+
+	// $orders = $woocommerce->get('orders', ['per_page' => 100]);
+	
+	// foreach($orders as $order) {
+	// 	$line_items = $order->line_items;
+
+	// 	if ($order->date_completed >= $fechaMenosDosSemanasFormatted && $order->date_completed <= $fechaActual) {
+	// 		foreach ($line_items as $item) {
+	// 			$product = wc_get_product($item->product_id);
+			
+	// 			if (!isset($products[$item->product_id])) {
+	// 				$products[$item->product_id] = [
+	// 					'product' => $product,
+	// 					'total_price' => get_item_subtotal(['product_id' => $item->product_id, 'variation_id' => $item->variation_id, 'quantity' => $item->quantity]),
+	// 					'quantity' => $item->quantity
+	// 				];
+	// 			} else {
+					
+	// 				$products[$item->product_id]['total_price'] += get_item_subtotal(['product_id' => $item->product_id, 'quantity' => $item->quantity]);
+	// 				$products[$item->product_id]['quantity'] += $item->quantity;
+	// 			}
+	// 		}
+	// 	}
+	// }
+					
+	// $results2 = [];
+	// $productsQuantityMoreThan15 = [];
+
+	// usort($products, 'orderByQuantity');
+
+	// foreach($products as $key => $product) {
+	// 	if ($products[$key]['quantity'] >= 15) {
+	// 		$productsQuantityMoreThan15[] = $products[$key];
+	// 	}
+	// }
+	
+	// $sliced_product_array = array_slice($productsQuantityMoreThan15, 0, 20);
+
+	// foreach($sliced_product_array as $key => $product) {
+	// 	$results2[] = $sliced_product_array[$key];
+	// }
+
+	// usort($results2, 'orderByPrice');
+
+	$results = $woocommerce->get('reports/top_sellers', [
+		'date_min' => $fechaMenosDosSemanasFormatted
+	]);
+
+	usort($results, 'orderByPrice');
 
 	try {
 		?>
 		<div class="woocommerce">
 			<ul class="products top_sellers">
-				<?php foreach ($results as $result) { ?>
-					<?php
+				<?php foreach ($results as $result) {
 					$product = wc_get_product($result->product_id);
 
-					if ($product): ?>
+					$not_allowed_products = [7336, 7333, 8752, 8750, 8747];
+		
+					$show_product = !in_array($product->get_id(), $not_allowed_products);
+		
+					if ($product && $show_product): ?>
 						<li id="product-<?php echo $product->get_id(); ?>" <?php wc_product_class('', $product); ?>
 							style="width: auto;">
 							<a href="<?php echo $product->get_permalink(); ?>">
@@ -228,10 +294,13 @@ function woocommerce_rest_api_shortcode($atts, $results)
 									</div>
 								</div>
 							</a>
-							<?php echo apply_filters('custom_simple_product_get_price_html', $product); ?>
+							<?php if ($product->is_type('variable')) : ?>
+								<?php echo apply_filters('custom_min_max_variable_price_html', '', $product); ?>
+							<?php else : ?>
+								<?php echo apply_filters('custom_simple_product_get_price_html', $product); ?>
+							<?php endif; ?>
 							<?php custom_woocommerce_template_add_to_cart($product); ?>
 						</li>
-
 						<?php
 					endif;
 					?>
@@ -255,8 +324,7 @@ function get_top_sellers() {
 
 add_shortcode('woo_rest_api', 'woocommerce_rest_api_shortcode');
 
-function custom_woocommerce_template_add_to_cart($product, $args = [])
-{
+function custom_woocommerce_template_add_to_cart($product, $args = []) {
 	if ($product) {
 		$defaults = array(
 			'quantity' => 1,
@@ -312,12 +380,10 @@ function custom_woocommerce_template_add_to_cart($product, $args = [])
 /**
  * Title, logo code
  */
-function altr_title_logo()
-{
-	?>
+function altr_title_logo() { ?>
 	<div class="site-heading">
 		<div class="site-branding-logo">
-			<a href="https://liligrow.es/ruta-desarrollo-pagina-inicio<?php //echo esc_url(home_url('/')); ?>" rel="home">
+			<a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
 				<figure>
 					<picture>
 						<source media="(max-width: 767px)"
@@ -357,8 +423,7 @@ function altr_title_logo()
 /**
  * Menu position change
  */
-function altr_menu()
-{
+function altr_menu() {
 	?>
 	<div class="menu-heading">
 		<nav id="site-navigation" class="navbar navbar-default">
@@ -403,8 +468,7 @@ if (!function_exists('altr_menu_button')) {
 /**
  * Create WooCommerce search filed in header
  */
-function altr_menu_search_widget()
-{
+function altr_menu_search_widget() {
 	?>
 	<div class="menu-search-widget">
 		<?php the_widget('WC_Widget_Product_Search', 'placeholder="Buscar..."'); ?>
@@ -415,8 +479,7 @@ function altr_menu_search_widget()
 /**
  * Add header widget area
  */
-function altr_header_widget()
-{
+function altr_header_widget() {
 	?>
 	<div class="header-widget-area">
 		<?php if (is_active_sidebar('altr-header-area')) { ?>
@@ -429,8 +492,7 @@ function altr_header_widget()
 }
 
 if (!function_exists('altr_my_account')) {
-	function altr_my_account()
-	{
+	function altr_my_account() {
 		$login_link = get_permalink(get_option('woocommerce_myaccount_page_id'));
 		?>
 		<div class="header-my-account">
@@ -444,17 +506,13 @@ if (!function_exists('altr_my_account')) {
 }
 
 
-function altr_head_start()
-{
-	?>
+function altr_head_start() { ?>
 	<div class="header-right">
 		<div class="settings">
 			<?php
 }
 
-function altr_head_end()
-{
-	?>
+function altr_head_end() { ?>
 		</div>
 	</div>
 	<?php
@@ -465,8 +523,7 @@ add_action('widgets_init', 'altr_widgets_init');
 /**
  * Register the Sidebars
  */
-function altr_widgets_init()
-{
+function altr_widgets_init() {
 	register_sidebar(
 		array(
 			'name' => esc_html__('Header Section', 'altr'),
@@ -495,8 +552,7 @@ function altr_widgets_init()
  * */
 add_action('altr_top_bar', 'altr_top_bar');
 
-function altr_top_bar()
-{
+function altr_top_bar() {
 	$conditions = get_option('free-shipping-conditions');
 
     foreach ($conditions as $condition) {
@@ -504,8 +560,7 @@ function altr_top_bar()
             $min_subtotal_cart_free_shipping_value = $condition['value'];
             break;
         }
-    }
-    ?>
+    } ?>
 	<div class="top-bar-section container-fluid">
 		<div class="container">
 			<div id="minors-sale-info-container">
@@ -587,20 +642,19 @@ function altr_top_bar()
 // AUTO GENERATED - Do not modify or remove comment markers above or below:
 
 if (!function_exists('chld_thm_cfg_locale_css')):
-	function chld_thm_cfg_locale_css($uri)
-	{
+	function chld_thm_cfg_locale_css($uri) {
 		if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
 			$uri = get_template_directory_uri() . '/rtl.css';
 		return $uri;
 	}
 endif;
+
 add_filter('locale_stylesheet_uri', 'chld_thm_cfg_locale_css');
 
 // END ENQUEUE PARENT ACTION
 
 if (!function_exists('get_product_categories_list ')):
-	function get_product_categories_list($list_class = null)
-	{
+	function get_product_categories_list($list_class = null) {
 		$orderby = 'name';
 		$order = 'asc';
 		$hide_empty = true;
@@ -640,17 +694,16 @@ if (!function_exists('woo_hide_product_categories_widget')) {
 	}
 }
 
-function redirect_after_logout($logout_url, $redirect)
-{
+function redirect_after_logout($logout_url, $redirect) {
 	return $logout_url . '&amp;redirect_to=' . home_url();
 }
+
 add_filter('logout_url', 'redirect_after_logout', 10, 2);
 
 /**
  * Modificaciones a menu de mi cuenta
  */
-function my_account_menu_order($args)
-{
+function my_account_menu_order($args) {
 	$menuOrder = array(
 		'dashboard' => __('Dashboard', 'woocommerce'),
 		'orders' => __('Orders', 'woocommerce'),
@@ -802,8 +855,7 @@ if (!function_exists('altr_cart_content')) {
 	}
 }
 
-function toggle_cart_sidebar()
-{
+function toggle_cart_sidebar() {
 	?>
 	<script>
 		const headerCart = document.querySelector('.header-cart');
@@ -836,8 +888,7 @@ add_action('wp_footer', 'toggle_cart_sidebar');
 // add filter if we want to use in wordpress with woocommerce
 add_filter('wp_get_nav_menu_items', 'nav_remove_empty_category_menu_item', 10, 3);
 
-function nav_remove_empty_category_menu_item($items, $menu, $args)
-{
+function nav_remove_empty_category_menu_item($items, $menu, $args) {
 	global $wpdb;
 
 	foreach ($items as $key => $item) {
@@ -868,21 +919,20 @@ function nav_remove_empty_category_menu_item($items, $menu, $args)
 
 }
 
-function my_child_theme_register_menus()
-{
+function my_child_theme_register_menus() {
 	register_nav_menus(
 		array(
 			'hc-offcanvas-menu' => 'Menú personalizado para hc-offcanvas-nav',
 		)
 	);
 }
+
 add_action('after_setup_theme', 'my_child_theme_register_menus');
 
 /**
  * Campos personalizados del formulario de Registro de WooCommerce
  * */
-function add_woocommerce_sign_up_custom_fields()
-{
+function add_woocommerce_sign_up_custom_fields() {
 	?>
 	<div class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 		<label for="reg_first_name">
@@ -902,15 +952,15 @@ function add_woocommerce_sign_up_custom_fields()
 				echo esc_attr($_POST['account_last_name']); ?>" required>
 	</div>
 
-	<div class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+	<!-- <div class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 		<label for="reg_date_of_birth">
-			<?php esc_attr_e('Date of birth.', 'woocommerce'); ?> <span class="required">*</span>
+			<?php // esc_attr_e('Date of birth.', 'woocommerce'); ?> <span class="required">*</span>
 		</label>
 		<input type="date" class="woocommerce-Input woocommerce-Input--date input-text" name="account_date_of_birth"
-			id="reg_date_of_birth" value="<?php if (!empty($_POST['account_date_of_birth']))
-				echo esc_attr($_POST['account_date_of_birth']); ?>" required>
+			id="reg_date_of_birth" value="<?php // if (!empty($_POST['account_date_of_birth']))
+				// echo esc_attr($_POST['account_date_of_birth']); ?>" required>
 		<div class="underage hide">Para poder registrarte necesitas ser mayor de 18 años.</div>
-	</div>
+	</div> -->
 	<?php
 }
 
@@ -924,12 +974,20 @@ function add_new_fields_to_new_created_customer($customer_id)
 	if (isset($_POST['account_last_name']) && !empty($_POST['account_last_name'])) {
 		update_user_meta($customer_id, 'last_name', sanitize_text_field($_POST['account_last_name']));
 	}
-	if (isset($_POST['account_date_of_birth']) && !empty($_POST['account_date_of_birth'])) {
-		update_user_meta($customer_id, 'date_of_birth', sanitize_text_field($_POST['account_date_of_birth']));
-	}
+	// if (isset($_POST['account_date_of_birth']) && !empty($_POST['account_date_of_birth'])) {
+	// 	update_user_meta($customer_id, 'date_of_birth', sanitize_text_field($_POST['account_date_of_birth']));
+	// }
 }
 
 add_action('woocommerce_created_customer', 'add_new_fields_to_new_created_customer');
+
+function custom_allow_special_chars_in_email( $email ) {
+    remove_filter( 'sanitize_email', 'sanitize_email', 20 );
+
+    return $email;
+}
+
+add_filter( 'woocommerce_email_is_valid_email', 'custom_allow_special_chars_in_email', 20 );
 
 /**
  * Custom Scripts, Styles & JSON Data
@@ -937,16 +995,16 @@ add_action('woocommerce_created_customer', 'add_new_fields_to_new_created_custom
 
 function enqueue_custom_scripts_to_specific_page()
 {
-	if (is_page('home')) {
+	if (is_page('inicio')) {
 
 		wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js', array(), null, true);
 	}
 
-	if (is_page('frequent-asked-questions')) {
+	if (is_page('preguntas-frecuentes')) {
 		wp_enqueue_script('custom-accordion-script', get_stylesheet_directory_uri() . '/assets/js/accordion.min.js', array(), null, true);
 	}
 
-	if (is_page("my-profile")) {
+	if (is_page("mi-perfil")) {
 		wp_enqueue_script('custom-login-page-script', get_stylesheet_directory_uri() . '/assets/js/login-page.js', array(), null, true);
 	}
 }
@@ -955,7 +1013,7 @@ add_action('wp_enqueue_scripts', 'enqueue_custom_scripts_to_specific_page');
 
 function enqueue_custom_styles_to_specific_page()
 {
-	if (is_page('home')) {
+	if (is_page('inicio')) {
 		wp_enqueue_style('swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css', array(), null);
 	}
 }
@@ -964,7 +1022,7 @@ add_action('wp_enqueue_scripts', 'enqueue_custom_styles_to_specific_page');
 
 function add_json_to_specific_page()
 {
-	if (is_page('frequent-asked-questions')) {
+	if (is_page('preguntas-frecuentes')) {
 		$faqs_json_file_url = get_stylesheet_directory_uri() . '/assets/json/faqs.json';
 		wp_enqueue_script('custom-faqs-script', get_stylesheet_directory_uri() . '/assets/', array(), '2.0', true);
 
@@ -1092,12 +1150,26 @@ function get_mini_cart_item_html($product, $cart_item, $cart_item_key)
 	</li>
 <?php }
 
-function show_remove_cart_item_icon($cart_item_key, $product, $product_id, $product_name)
+function show_remove_cart_item_icon($cart_item_key, $product, $product_id, $product_name, ?Type $type = null)
 {
+	if ($type === Type::MiniCart) {
+		return apply_filters(
+			'woocommerce_cart_item_remove_link',
+			sprintf(
+				'<a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><i class="las la-trash-alt la-lg"></i></a>',
+				esc_url(wc_get_cart_remove_url($cart_item_key)),
+				esc_attr(sprintf(__('Remove %s from cart', 'woocommerce'), wp_strip_all_tags($product->name))),
+				esc_attr($product->id),
+				esc_attr($cart_item_key),
+				esc_attr($product->sku)
+			),
+			$cart_item_key
+		);
+	}
 	return apply_filters(
 		'woocommerce_cart_item_remove_link',
 		sprintf(
-			'<a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><i class="las la-trash-alt la-lg"></i></a>',
+			'<button id="remove" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s" style="border: none!important; padding: 0;"><i class="las la-trash-alt la-lg"></i></button>',
 			esc_url(wc_get_cart_remove_url($cart_item_key)),
 			esc_attr(sprintf(__('Remove %s from cart', 'woocommerce'), wp_strip_all_tags($product->name))),
 			esc_attr($product->id),
@@ -1106,6 +1178,7 @@ function show_remove_cart_item_icon($cart_item_key, $product, $product_id, $prod
 		),
 		$cart_item_key
 	);
+	
 }
 
 function get_custom_product_quantity_input($_product, $cart_item = null, $cart_item_key = null, ?Type $type = null)
@@ -1141,7 +1214,7 @@ function get_custom_product_quantity_input($_product, $cart_item = null, $cart_i
 	return $custom_quantity_input;
 }
 
-function get_mapped_cart_item_data($_product, $cart_item, $cart_item_key)
+function get_mapped_cart_item_data($_product, $cart_item, $cart_item_key, $type)
 {
 	$tax_classes = $_product->get_tax_class();
 	$tax_rates = WC_Tax::get_rates($tax_classes);
@@ -1162,7 +1235,7 @@ function get_mapped_cart_item_data($_product, $cart_item, $cart_item_key)
 	$product->permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 	$product->sku = $_product->get_sku();
 	$product->quantity_input = get_custom_product_quantity_input($_product, $cart_item, $cart_item_key);
-	$product->remove = show_remove_cart_item_icon($cart_item_key, $_product, $product->id, $product->name);
+	$product->remove = show_remove_cart_item_icon($cart_item_key, $_product, $product->id, $product->name, $type);
 
 	return $product;
 }
@@ -1173,7 +1246,7 @@ function get_custom_cart($cart = null, $type = '')
 		$_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 
 		if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_widget_cart_item_visible', true, $cart_item, $cart_item_key)) {
-			$product = get_mapped_cart_item_data($_product, $cart_item, $cart_item_key);
+			$product = get_mapped_cart_item_data($_product, $cart_item, $cart_item_key, $type);
 
 			// if ( $type === Type::Cart->value ) { echo "Es para el carrito"; }
 			if ($type === Type::MiniCart) {
@@ -1199,10 +1272,18 @@ function custom_product_tabs($tabs)
 function woocommerce_template_extra_details() { ?>
 	<div class="details-banner">
 		<div class="gift">
-			<figure class="icon">
+			<figure class="icon" style="position: relative;">
 				<picture>
 					<img src="https://www.liligrow.es/wp-content/uploads/2023/10/gifts.webp" alt="Regalos en todos tus pedidos" />
 				</picture>
+				<div id="icon-info-tooltip-container" style="position: absolute; top: 0; right: -20px;">
+					<div id="icon-info-tooltip">
+						<i class="las la-exclamation-circle la-lx"></i>
+						<div class="tooltip-content">
+							Regalos disponibles a partir de 30€
+						</div>
+					</div>
+				</div>
 			</figure>
 			<div class="info">
 				<header>
@@ -1381,7 +1462,8 @@ function get_order_subtotal_sum($order) {
 
 	foreach ( $order->get_items() as $item_id => $item ) {
 		$result += get_item_subtotal([
-			'product_id' => $item->get_product()->id, 
+			'product_id' => $item->get_product()->id,
+			'variation_id' => $item->get_variation_id(),
 			'quantity' => $item->get_quantity()], 
 			false);
 	}
@@ -1417,8 +1499,27 @@ function get_cart_subtotal_sum($inc_taxes = true) {
 	return $subtotal_sum;
 }
 
+function get_cart_coupons_applied_total() {
+	$cart = WC()->cart;
+	$coupons = $cart->get_applied_coupons();
+	$total = 0;
+
+	foreach ($coupons as $key => $coupon) {
+		$coupon_info = new WC_Coupon($coupon);
+
+		if ($coupon_info->is_valid()) {
+			$total += $coupon_info->get_amount();
+		}
+	}
+
+	return $total / 100;
+}
+
 function get_cart_total_inc_shipping_total() {
-	return get_cart_subtotal_sum() + WC()->cart->get_shipping_total();
+	$coupon_percentage = get_cart_coupons_applied_total();
+	$total = get_cart_subtotal_sum() + WC()->cart->get_shipping_total();
+
+	return $total - ($total * $coupon_percentage);
 }
 
 function cart_totals_order_total_html() {
@@ -1427,7 +1528,6 @@ function cart_totals_order_total_html() {
 	// if (get_is_subtotal_condition_fulfilled()) {
 	// 	$total = get_cart_subtotal_sum();
 	// }
-
 
 	WC()->cart->set_total($total);
 	$value = '<strong>' . wc_price( $total ) . '</strong> ';
@@ -1477,3 +1577,65 @@ function custom_woocommerce_widget_shopping_cart_subtotal() { ?>
 }
 
 add_action( 'woocommerce_widget_shopping_cart_total', 'custom_woocommerce_widget_shopping_cart_subtotal', 10);
+
+add_filter( 'woocommerce_shipping_fields', 'custom_shipping_phone_required' );
+function custom_shipping_phone_required( $fields ) {
+	
+	$fields['shipping_phone']['label'] = 'Teléfono';
+	$fields['shipping_phone']['required'] = true;
+
+	return $fields;
+}
+
+add_action('custom_orders_pagination', 'custom_orders_pagination');
+
+function custom_orders_pagination($args) {
+	$current = $args['current_page'];
+	$total = $args['max_num_pages'];
+	$base = esc_url_raw($args['base'] . '%#%/');
+	$format = isset( $args['format'] ) ? $args['format'] : '';
+?>
+	<nav class="woocommerce-pagination">
+		<?php
+		echo paginate_links(
+			apply_filters(
+				'woocommerce_pagination_args',
+				array( // WPCS: XSS ok.
+					'base'      => $base,
+					'format'    => $format,
+					'add_args'  => false,
+					'current'   => max( 1, $current ),
+					'total'     => $total,
+					'prev_text' => is_rtl() ? '&rarr;' : '&larr;',
+					'next_text' => is_rtl() ? '&larr;' : '&rarr;',
+					'type'      => 'list',
+					'end_size'  => 3,
+					'mid_size'  => 3,
+				)
+			)
+		);
+		?>
+	</nav>
+<?php 
+}
+
+function custom_wc_page_endpoint_title( $title ) {
+	global $wp_query;
+
+	if ( ! is_null( $wp_query ) && ! is_admin() && is_main_query() && in_the_loop() && is_page() && is_wc_endpoint_url() ) {
+		$endpoint       = WC()->query->get_current_endpoint();
+		$action         = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+		$endpoint_title = WC()->query->get_endpoint_title( $endpoint, $action );
+		$title          = $endpoint_title ? $endpoint_title : $title;
+
+		if ($endpoint === 'orders') {
+			$title = preg_replace('/\([^)]+\)/', '', $title);
+		}
+		
+		remove_filter( 'the_title', 'wc_page_endpoint_title' );
+	}
+
+	return $title;
+}
+
+add_filter('the_title', 'custom_wc_page_endpoint_title');
