@@ -42,8 +42,6 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     define('WP_DEBUG_LOG', true);
     define('WP_DEBUG_DISPLAY', true);
     define('WP_CACHE_KEY_SALT', 'liligrow.es:');
-    define('CK_WOO', 'ck_968f11dd925c7b4e39e8739606395e17753d940d');
-    define('CS_WOO', 'cs_faa2de6e8fc676becdf65ed16bd4c46f1a97a90c');
 
     define( 'WP_REDIS_HOST', 'redis-15768.c309.us-east-2-1.ec2.cloud.redislabs.com' );
     define( 'WP_REDIS_PORT', 15768 );
@@ -51,6 +49,9 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     define( 'WP_REDIS_PREFIX', 'llgr_' );
     define( 'WP_REDIS_DATABASE', 0 );
 }
+
+define('CK_WOO', 'ck_968f11dd925c7b4e39e8739606395e17753d940d');
+define('CS_WOO', 'cs_faa2de6e8fc676becdf65ed16bd4c46f1a97a90c');
 
 /** Database charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');

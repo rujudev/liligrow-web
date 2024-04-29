@@ -177,6 +177,7 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
         const productForm = document.querySelector('.variations_form.cart');
         const productQtyContainer = this.querySelector('#product-qty-container');
         const addToCartButton = this.querySelector('.single_add_to_cart_button');
+        const woocommerceVariationAddToCart = variationsForm.querySelector('.woocommerce-variation-add-to-cart');
 
         const decrementButton = productQtyContainer.querySelector('button.decrement');
         const incrementButton = productQtyContainer.querySelector('button.increment');
@@ -296,17 +297,16 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
         })
 
         selectFormat.addEventListener('change', function(e) {
-            const value = parseInt(e.target.value);
+            const value = e.target.value;
 
             value === '' 
                 ? woocommerceVariationAddToCart.setAttribute('style', 'display: none;')
                 : woocommerceVariationAddToCart.removeAttribute('style')
         })
 
-        const woocommerceVariationAddToCart = variationsForm.querySelector('.woocommerce-variation-add-to-cart');
-
         if (selectFormat.value !== '') {
             woocommerceVariationAddToCart.removeAttribute('style');
+            localStorage.removeItem('added_variable_product');
         }
 
         observeNode(selectFormat, { attributes: true, childList: true, subtree: true });
